@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>메인 메뉴</title>
+  <style>
+    body {
+      background-color: #111;
+      color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .menu {
+      display: flex;
+      gap: 50px; /* 메뉴 간격 */
+      text-align: center;
+    }
+
+    .menu-item {
+      text-decoration: none;
+      color: yellow;
+      font-size: 24px;
+      font-weight: bold;
+      transition: color 0.3s, transform 0.3s;
+    }
+
+    .menu-item:hover {
+      color: orange;
+      transform: scale(1.1); /* 살짝 확대 효과 */
+    }
+  </style>
+</head>
+<body>
+  <div class="menu">
+    <a href="music.html" class="menu-item">노래</a> <!-- 노래 메뉴 -->
+    <a href="game.html" class="menu-item">게임</a> <!-- 게임 메뉴 -->
+    <a href="#" class="menu-item">게시물</a> <!-- 게시물 메뉴 -->
+    <a href="#" class="menu-item">다이어리</a> <!-- 다이어리 메뉴 -->
+  </div>
+</body>
+</html>
