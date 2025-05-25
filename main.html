@@ -4,9 +4,8 @@
   <meta charset="UTF-8">
   <title>메인 메뉴</title>
   <style>
-    /* 전체 배경 및 중앙 정렬 */
     body {
-      background-color: #6e9c8f ; /* 아주 연한 초록 */
+      background-color: #6e9c8f;
       margin: 0;
       width: 100vw;
       height: 100vh;
@@ -16,10 +15,9 @@
       align-items: center;
       min-height: 100vh;
     }
-    /* 전체 컨테이너: 초록 테두리와 내부 배경 */
     .container {
-      background: #c8ded9; /* 연한 초록 */
-      border: 24px solid #174642; /* 중간 초록 */
+      background: #c8ded9;
+      border: 24px solid #174642;
       border-radius: 0.5rem;
       width: 90vw;
       max-width: 1200px;
@@ -28,76 +26,69 @@
       display: flex;
       box-sizing: border-box;
     }
-    /* 왼쪽 사이드바: 프로필, 메뉴 목록 */
     .sidebar {
       width: 300px;
-      background: #ecf4f3; /* 아주 연한 초록 */
+      background: #ecf4f3;
       display: flex;
       flex-direction: column;
       align-items: center;
       padding-top: 40px;
       position: relative;
-      border-right: 6px solid #174642; /* 중간 초록 */
+      border-right: 6px solid #174642;
     }
-    /* 프로필 원형 영역 */
     .profile-circle {
       width: 140px;
       height: 140px;
-      background: #6e9c8f; /* 중간 초록 */
+      background: #6e9c8f;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 28px;
-      color: #ecf4f3; /* 아주 연한 초록 */
-      margin-bottom: 40px;
+      color: #ecf4f3;
+      margin-bottom: 20px;
       font-weight: 500;
       letter-spacing: 2px;
     }
-    /* '목록' 텍스트 스타일 */
-    .sidebar-title {
-      font-size: 22px;
-      color: #174642; /* 진한 초록 */
-      margin-bottom: 30px;
-      align-self: flex-start;
-      margin-left: 30px;
-      font-weight: 400;
-    }
-    /* 메뉴 리스트 스타일 */
-    .menu {
-      display: flex;
-      flex-direction: column;
-      gap: 25px;
-      width: 100%;
-      align-items: flex-start;
-      margin-left: 40px;
-      margin-top: 10px;
-    }
-    /* 각 메뉴 항목 스타일 */
-    .menu-item {
-      text-decoration: none;
-      color: #174642; /* 진한 초록 */
+    .profile-name {
       font-size: 20px;
-      font-weight: 500;
-      transition: color 0.3s, transform 0.3s;
+      font-weight: bold;
+      color: #174642;
+      margin-bottom: 10px;
     }
-    /* 메뉴 항목 호버 효과 */
-    .menu-item:hover {
-      color: #6e9c8f; /* 중간 초록 */
-      transform: scale(1.08);
+    .profile-message {
+      font-size: 14px;
+      color: #555;
+      text-align: center;
+      padding: 0 10px;
+      margin-bottom: 20px;
     }
-    /* 오른쪽 컨텐츠 영역 */
+    .sidebar-info {
+      font-size: 14px;
+      color: #174642;
+      text-align: left;
+      width: 80%;
+      margin-bottom: 30px;
+    }
+    .sidebar-info strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+    .sidebar-info ul {
+      padding-left: 20px;
+      line-height: 1.6;
+      margin: 0;
+    }
+
     .content {
       flex: 1;
-      background: #ecf4f3; /* 아주 연한 초록 */
-      /* 내용이 들어갈 자리 */
+      background: #ecf4f3;
       position: relative;
       z-index: 2;
     }
-    /* 오른쪽 추가 영역 스타일 */
     .side-area {
       width: 50px;
-      background: #174642; /* 중간 초록 */
+      background: #174642;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -105,12 +96,11 @@
       padding-top: 30px;
       gap: 10px;
     }
-    /* 탭 버튼 스타일 */
     .side-tab {
       width: 70px;
       height: 40px;
-      background: #ecf4f3; /* 아주 연한 초록 */
-      color: #174642; /* 진한 초록 */
+      background: #ecf4f3;
+      color: #174642;
       border: none;
       border-radius: 10px;
       margin-bottom: 8px;
@@ -121,28 +111,27 @@
       justify-content: center;
       transition: background 0.2s, color 0.2s;
       z-index: 1;
+      text-decoration: none;
     }
     .side-tab.active, .side-tab:hover {
-      background: #c8ded9; /* 연한 초록 */
-      color: #174642; /* 진한 초록 */
+      background: #c8ded9;
+      color: #174642;
     }
 
-    /* 초록 점 스타일 */
     .blue-dot {
       width: 22px;
       height: 22px;
-      background: #174642; /* 진한 초록 */
+      background: #174642;
       border-radius: 50%;
       position: absolute;
       z-index: 1;
     }
-    /* 점 연결 바(둥근 사각형) */
     .dot-connector {
       position: absolute;
-      left: -40px; /* content 기준, 왼쪽 점 위치에 맞춤 */
-      width: 70px; /* 점 간 거리(조정 가능) */
+      left: -40px;
+      width: 70px;
       height: 16px;
-      background: #6e9c8f; /* 중간 초록 */
+      background: #6e9c8f;
       border-radius: 12px;
       z-index: 2;
     }
@@ -150,12 +139,10 @@
     .connector-2 { top: 82px; }
     .connector-3 { bottom: 122px; }
     .connector-4 { bottom: 82px; }
-    /* 왼쪽 점 4개 */
     .dot-left-1 { left: 260px; top: 38px; }
     .dot-left-2 { left: 260px; top: 80px; }
     .dot-left-3 { left: 260px; bottom: 120px; }
     .dot-left-4 { left: 260px; bottom: 80px; }
-    /* 오른쪽 점 4개 */
     .dot-right-1 { right: 760px; top: 38px; }
     .dot-right-2 { right: 760px; top: 80px; }
     .dot-right-3 { right: 760px; bottom: 120px; }
@@ -168,37 +155,99 @@
     <div class="sidebar">
       <!-- 프로필 원형 -->
       <div class="profile-circle">프로필</div>
-      <!-- 메뉴 제목/리스트 삭제 -->
-      <!-- 왼쪽 파란 점 4개 -->
+      <!-- 사용자 이름 -->
+      <div class="profile-name">홍길동</div>
+      <!-- 한 줄 소개 -->
+      <div class="profile-message">오늘도 차분하게, 나답게 ☘️</div>
+      <!-- 오늘의 할 일 -->
+      <div class="sidebar-info">
+        <strong>📌 오늘의 할 일</strong>
+        <ul>
+          <li>다이어리 쓰기</li>
+          <li>노래 듣기</li>
+          <li>게임 미션 완료</li>
+        </ul>
+      </div>
+      <!-- 왼쪽 점 4개 -->
       <div class="blue-dot dot-left-1"></div>
       <div class="blue-dot dot-left-2"></div>
       <div class="blue-dot dot-left-3"></div>
       <div class="blue-dot dot-left-4"></div>
     </div>
-    <!-- 오른쪽 내용 영역 -->
-    <div class="content">
-      <!-- 점 연결 바(둥근 사각형) 4개 -->
-      <div class="dot-connector connector-1"></div>
-      <div class="dot-connector connector-2"></div>
-      <div class="dot-connector connector-3"></div>
-      <div class="dot-connector connector-4"></div>
-      <!-- 오른쪽 파란 점 4개 -->
-      <div class="blue-dot dot-right-1"></div>
-      <div class="blue-dot dot-right-2"></div>
-      <div class="blue-dot dot-right-3"></div>
-      <div class="blue-dot dot-right-4"></div>
-      <!-- 오른쪽 내용 영역 (비워둠) -->
+
+    <!-- 기존 내용 생략 -->
+<!-- 오른쪽 내용 영역 -->
+<div class="content">
+  <!-- 점 연결 바(둥근 사각형) 4개 -->
+  <div class="dot-connector connector-1"></div>
+  <div class="dot-connector connector-2"></div>
+  <div class="dot-connector connector-3"></div>
+  <div class="dot-connector connector-4"></div>
+  <!-- 오른쪽 파란 점 4개 -->
+  <div class="blue-dot dot-right-1"></div>
+  <div class="blue-dot dot-right-2"></div>
+  <div class="blue-dot dot-right-3"></div>
+  <div class="blue-dot dot-right-4"></div>
+
+  <!-- ✅ 홈 콘텐츠 추가 -->
+  <div style="padding: 40px; font-family: 'Arial', sans-serif; color: #174642; ">
+    <!-- 오늘 날짜와 인사말 -->
+    <div style="margin-bottom: 30px;">
+      <h2 style="margin: 0;">2025년 5월 26일</h2>
+      <p style="margin-top: 8px; font-size: 18px;">오늘 하루도 좋은 하루 되세요 😊</p>
     </div>
-    <!-- 오른쪽 추가 영역 -->
+
+    <!-- 오늘의 기분 -->
+    <div style="margin-bottom: 30px;">
+      <p style="margin-bottom: 10px;">오늘 기분은 어떤가요?</p>
+      <div style="font-size: 28px; display: flex; gap: 12px;">
+        <span title="행복">😄</span>
+        <span title="보통">😐</span>
+        <span title="슬픔">😢</span>
+        <span title="화남">😡</span>
+        <span title="피곤">😴</span>
+      </div>
+    </div>
+
+    <!-- 최근 다이어리 -->
+    <div style="margin-bottom: 30px;">
+      <h3 style="margin-bottom: 10px;">📔 최근 다이어리</h3>
+      <ul style="padding-left: 20px; line-height: 1.6;">
+        <li>5월 25일 - 좋은 하루</li>
+        <li>5월 24일 - 비 오는 날</li>
+        <li>5월 23일 - 친구랑 카페</li>
+      </ul>
+    </div>
+
+    <!-- 오늘의 추천 노래 -->
+    <div style="margin-bottom: 30px;">
+      <h3 style="margin-bottom: 10px;">🎵 오늘의 추천 노래</h3>
+      <audio controls style="width: 100%; max-width: 400px;">
+        <source src="music/today_song.mp3" type="audio/mp3">
+        브라우저가 오디오를 지원하지 않습니다.
+      </audio>
+    </div>
+
+    <!-- 게임 미션 -->
+    <div>
+      <h3 style="margin-bottom: 10px;">🎮 오늘의 게임 미션</h3>
+      <p>기억력 테스트에 도전해 보세요!</p>
+      <a href="game.html" style="display: inline-block; margin-top: 8px; text-decoration: none; color: #174642; font-weight: bold;">→ 게임 시작</a>
+    </div>
+  </div>
+</div>
+
+
+    <!-- 오른쪽 탭 영역 -->
     <div class="side-area">
-      <a href="main.html" class="side-tab active" title="홈" style="text-decoration:none;">&#8962;</a>
-      <a href="diary.html" class="side-tab" title="다이어리" style="text-decoration:none;">📔</a>
-      <a href="music.html" class="side-tab" title="음악" style="text-decoration:none;">🎵</a>
-      <a href="game.html" class="side-tab" title="게임" style="text-decoration:none;">🎮</a>
+      <a href="main.html" class="side-tab active" title="홈">&#8962;</a>
+      <a href="diary.html" class="side-tab" title="다이어리">📔</a>
+      <a href="music.html" class="side-tab" title="음악">🎵</a>
+      <a href="game.html" class="side-tab" title="게임">🎮</a>
       <button class="side-tab" title="메세지">💬</button>
-      <button class="side-tab active" title="설정" style="text-decoration:none;">&#9881;</button>
+      <button class="side-tab" title="설정">&#9881;</button>
       <button class="side-tab" title="정보">&#8505;</button>
-      <a href="로그인.html" class="side-tab" title="로그아웃" style="text-decoration:none;">&#10162;</a>
+      <a href="로그인.html" class="side-tab" title="로그아웃">&#10162;</a>
       <button class="side-tab" title="목록">&#9776;</button>
     </div>
   </div>
