@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>메인 메뉴</title>
+  <title>diary</title>
   <style>
     /* 전체 배경 및 중앙 정렬 */
     body {
@@ -160,15 +160,187 @@
     .dot-right-2 { right: 760px; top: 80px; }
     .dot-right-3 { right: 760px; bottom: 120px; }
     .dot-right-4 { right: 760px; bottom: 80px; }
+    .todo-memo-area {
+      width: 92%;
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      align-items: flex-start;
+    }
+    .todo-box, .memo-box {
+      width: 80%;
+      background: none;
+      border-radius: 0;
+      box-shadow: none;
+      padding: 0;
+      margin-bottom: 0;
+    }
+    .todo-title, .memo-title {
+      font-size: 1.15rem;
+      color: #174642;
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+      padding-left: 2px;
+    }
+    .todo-list {
+      list-style: disc inside;
+      padding: 0 0 0 10px;
+      margin: 0 0 8px 0;
+    }
+    .todo-list li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 6px;
+      font-size: 15px;
+      color: #174642;
+      background: none;
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
+      padding: 0;
+    }
+    .todo-list input[type="checkbox"] {
+      margin-right: 8px;
+      accent-color: #6e9c8f;
+    }
+    .todo-input-row {
+      display: flex;
+      gap: 6px;
+      margin-top: 8px;
+      width: 100%;
+    }
+    .todo-input-row input[type="text"] {
+      flex: 1;
+      border: 1px solid #c8ded9;
+      border-radius: 8px;
+      padding: 2px 8px;
+      font-size: 14px;
+      outline: none;
+      background: #ecf4f3;
+      height: 30px;
+    }
+    .todo-input-row button {
+      border: none;
+      background: #6e9c8f;
+      color: #fff;
+      border-radius: 8px;
+      padding: 2px 16px;
+      font-size: 15px;
+      cursor: pointer;
+      transition: background 0.2s;
+      height: 36px;
+    }
+    .todo-input-row button:active {
+      background: #174642;
+    }
+    .memo-title {
+      margin-top: 18px;
+    }
+    .memo-box textarea {
+      width: 100%;
+      min-height: 60px;
+      border-radius: 8px;
+      border: 1px solid #c8ded9;
+      background: #ecf4f3;
+      font-size: 14px;
+      padding: 8px;
+      resize: vertical;
+      color: #174642;
+      outline: none;
+      margin-top: 6px;
+    }
+    .calendar-area {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      margin-top: 5px;
+    }
+    .calendar-sheet {
+      /* background: #fff; */
+      border-radius: 18px;
+      box-shadow: none;
+      width: 700px;
+      padding: 36px 32px 24px 32px;
+      box-sizing: border-box;
+      border: none;
+      position: relative;
+    }
+    .calendar-month {
+      font-size: 64px;
+      font-weight: bold;
+      color: #111;
+      letter-spacing: -2px;
+      margin-bottom: 0;
+      line-height: 1;
+    }
+    .calendar-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 18px;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+    .calendar-table th {
+      font-size: 16px;
+      font-weight: 500;
+      color: #222;
+      padding-bottom: 8px;
+      letter-spacing: 1px;
+      text-align: center;
+    }
+    .calendar-table th.sat,
+    .calendar-table td.sat {
+      color: #2563eb;
+    }
+    .calendar-table th.sun,
+    .calendar-table td.sun {
+      color: #e74c3c;
+    }
+    .calendar-table td {
+      width: 13.5%;
+      height: 70px;
+      border: 1px solid #111;
+      text-align: right;
+      vertical-align: top;
+      font-size: 15px;
+      color: #222;
+      background: none;
+      padding: 6px 8px 0 0;
+    }
+    .calendar-table tr {
+      height: 48px;
+    }
+    .calendar-table td.empty {
+      background: none;
+      border: 1px solid #111;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <!-- 왼쪽 사이드바 -->
     <div class="sidebar">
-      <!-- 프로필 원형 -->
-      <div class="profile-circle">프로필</div>
-      <!-- 메뉴 제목/리스트 삭제 -->
+      <!-- 프로필/목록/메뉴 삭제, To Do/Memo만 유지 -->
+      <div class="todo-memo-area">
+        <div class="todo-box">
+          <div class="todo-title">To Do List</div>
+          <ul class="todo-list">
+            <li><input type="checkbox">예시 할 일 1</li>
+            <li><input type="checkbox">예시 할 일 2</li>
+            <li><input type="checkbox">예시 할 일 3</li>
+          </ul>
+          <div class="todo-input-row">
+            <input type="text" placeholder="할 일 추가" disabled>
+            <button type="button" disabled>+</button>
+          </div>
+        </div>
+        <div class="memo-box">
+          <div class="memo-title">Memo</div>
+          <textarea placeholder="메모를 입력하세요"></textarea>
+        </div>
+      </div>
       <!-- 왼쪽 파란 점 4개 -->
       <div class="blue-dot dot-left-1"></div>
       <div class="blue-dot dot-left-2"></div>
@@ -188,6 +360,56 @@
       <div class="blue-dot dot-right-3"></div>
       <div class="blue-dot dot-right-4"></div>
       <!-- 오른쪽 내용 영역 (비워둠) -->
+      <div class="calendar-area">
+        <div class="calendar-sheet">
+          <div class="calendar-month">09</div>
+          <table class="calendar-table">
+            <thead>
+              <tr>
+                <th>MON</th>
+                <th>TUE</th>
+                <th>WED</th>
+                <th>THU</th>
+                <th>FRI</th>
+                <th class="sat">SAT</th>
+                <th class="sun">SUN</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="empty"></td>
+                <td class="empty"></td>
+                <td class="empty"></td>
+                <td class="empty"></td>
+                <td class="empty"></td>
+                <td class="sat">1</td>
+                <td class="sun">2</td>
+              </tr>
+              <tr>
+                <td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td class="sat">8</td><td class="sun">9</td>
+              </tr>
+              <tr>
+                <td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td class="sat">15</td><td class="sun">16</td>
+              </tr>
+              <tr>
+                <td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td class="sat">22</td><td class="sun">23</td>
+              </tr>
+              <tr>
+                <td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td class="sat">29</td><td class="sun">30</td>
+              </tr>
+              <tr>
+                <td class="empty"></td>
+                <td class="empty"></td>
+                <td class="empty"></td>
+                <td class="empty"></td>
+                <td class="empty"></td>
+                <td class="empty"></td>
+                <td class="empty"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
     <!-- 오른쪽 추가 영역 -->
     <div class="side-area">

@@ -2,11 +2,10 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>메인 메뉴</title>
+  <title>로그인</title>
   <style>
-    /* 전체 배경 및 중앙 정렬 */
     body {
-      background-color: #6e9c8f ; /* 아주 연한 초록 */
+      background-color: #6e9c8f;
       margin: 0;
       width: 100vw;
       height: 100vh;
@@ -16,10 +15,9 @@
       align-items: center;
       min-height: 100vh;
     }
-    /* 전체 컨테이너: 초록 테두리와 내부 배경 */
     .container {
-      background: #c8ded9; /* 연한 초록 */
-      border: 24px solid #174642; /* 중간 초록 */
+      background: #c8ded9;
+      border: 24px solid #174642;
       border-radius: 0.5rem;
       width: 90vw;
       max-width: 1200px;
@@ -28,42 +26,39 @@
       display: flex;
       box-sizing: border-box;
     }
-    /* 왼쪽 사이드바: 프로필, 메뉴 목록 */
     .sidebar {
       width: 300px;
-      background: #ecf4f3; /* 아주 연한 초록 */
+      background: #ecf4f3;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding-top: 40px;
+      justify-content: center; /* 중앙 정렬 */
+      padding: 0;
       position: relative;
-      border-right: 6px solid #174642; /* 중간 초록 */
+      border-right: 6px solid #174642;
     }
-    /* 프로필 원형 영역 */
     .profile-circle {
       width: 140px;
       height: 140px;
-      background: #6e9c8f; /* 중간 초록 */
+      background: #6e9c8f;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 28px;
-      color: #ecf4f3; /* 아주 연한 초록 */
+      color: #ecf4f3;
       margin-bottom: 40px;
       font-weight: 500;
       letter-spacing: 2px;
     }
-    /* '목록' 텍스트 스타일 */
     .sidebar-title {
       font-size: 22px;
-      color: #174642; /* 진한 초록 */
+      color: #174642;
       margin-bottom: 30px;
       align-self: flex-start;
       margin-left: 30px;
       font-weight: 400;
     }
-    /* 메뉴 리스트 스타일 */
     .menu {
       display: flex;
       flex-direction: column;
@@ -73,31 +68,29 @@
       margin-left: 40px;
       margin-top: 10px;
     }
-    /* 각 메뉴 항목 스타일 */
     .menu-item {
       text-decoration: none;
-      color: #174642; /* 진한 초록 */
+      color: #174642;
       font-size: 20px;
       font-weight: 500;
       transition: color 0.3s, transform 0.3s;
     }
-    /* 메뉴 항목 호버 효과 */
     .menu-item:hover {
-      color: #6e9c8f; /* 중간 초록 */
+      color: #6e9c8f;
       transform: scale(1.08);
     }
-    /* 오른쪽 컨텐츠 영역 */
     .content {
       flex: 1;
-      background: #ecf4f3; /* 아주 연한 초록 */
-      /* 내용이 들어갈 자리 */
+      background: #ecf4f3;
       position: relative;
       z-index: 2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
-    /* 오른쪽 추가 영역 스타일 */
     .side-area {
       width: 50px;
-      background: #174642; /* 중간 초록 */
+      background: #174642;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -105,12 +98,11 @@
       padding-top: 30px;
       gap: 10px;
     }
-    /* 탭 버튼 스타일 */
     .side-tab {
       width: 70px;
       height: 40px;
-      background: #ecf4f3; /* 아주 연한 초록 */
-      color: #174642; /* 진한 초록 */
+      background: #ecf4f3;
+      color: #174642;
       border: none;
       border-radius: 10px;
       margin-bottom: 8px;
@@ -123,26 +115,23 @@
       z-index: 1;
     }
     .side-tab.active, .side-tab:hover {
-      background: #c8ded9; /* 연한 초록 */
-      color: #174642; /* 진한 초록 */
+      background: #c8ded9;
+      color: #174642;
     }
-
-    /* 초록 점 스타일 */
     .blue-dot {
       width: 22px;
       height: 22px;
-      background: #174642; /* 진한 초록 */
+      background: #174642;
       border-radius: 50%;
       position: absolute;
       z-index: 1;
     }
-    /* 점 연결 바(둥근 사각형) */
     .dot-connector {
       position: absolute;
-      left: -40px; /* content 기준, 왼쪽 점 위치에 맞춤 */
-      width: 70px; /* 점 간 거리(조정 가능) */
+      left: -40px;
+      width: 70px;
       height: 16px;
-      background: #6e9c8f; /* 중간 초록 */
+      background: #6e9c8f;
       border-radius: 12px;
       z-index: 2;
     }
@@ -160,34 +149,117 @@
     .dot-right-2 { right: 760px; top: 80px; }
     .dot-right-3 { right: 760px; bottom: 120px; }
     .dot-right-4 { right: 760px; bottom: 80px; }
+    /* 로그인 폼 스타일 */
+    .login-form-container {
+      background: #fff;
+      padding: 40px 32px 32px 32px;
+      border-radius: 20px;
+      box-shadow: 0 2px 12px #0001;
+      min-width: 320px;
+    }
+    .login-form-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 12px;
+    }
+    .login-form-table input[type="text"],
+    .login-form-table input[type="password"] {
+      width: 100%;
+      height: 32px;
+      font-size: 15px;
+      border: 0;
+      border-radius: 15px;
+      outline: none;
+      padding-left: 10px;
+      background: #ecf4f3;
+    }
+    .login-form-table input[type="submit"] {
+      width: 100%;
+      height: 32px;
+      font-size: 15px;
+      border: 0;
+      border-radius: 15px;
+      outline: none;
+      background: #6e9c8f;
+      color: #fff;
+      cursor: pointer;
+    }
+    .login-form-table input[type="submit"]:active {
+      background: #174642;
+    }
+    .login-form-table label {
+      font-size: 13px;
+      color: #174642;
+      margin-left: 6px;
+    }
+    .login-form-table a {
+      font-size: 12px;
+      color: #6e9c8f;
+      text-decoration: none;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <!-- 왼쪽 사이드바 -->
     <div class="sidebar">
-      <!-- 프로필 원형 -->
-      <div class="profile-circle">프로필</div>
-      <!-- 메뉴 제목/리스트 삭제 -->
-      <!-- 왼쪽 파란 점 4개 -->
+      <img src="picture/logo.png" alt="로고" style="width:300px; height:auto; display:block;">
+    <!-- 왼쪽 파란 점 4개 -->
       <div class="blue-dot dot-left-1"></div>
       <div class="blue-dot dot-left-2"></div>
       <div class="blue-dot dot-left-3"></div>
       <div class="blue-dot dot-left-4"></div>
-    </div>
+      </div>
     <!-- 오른쪽 내용 영역 -->
     <div class="content">
-      <!-- 점 연결 바(둥근 사각형) 4개 -->
       <div class="dot-connector connector-1"></div>
       <div class="dot-connector connector-2"></div>
       <div class="dot-connector connector-3"></div>
       <div class="dot-connector connector-4"></div>
-      <!-- 오른쪽 파란 점 4개 -->
       <div class="blue-dot dot-right-1"></div>
       <div class="blue-dot dot-right-2"></div>
       <div class="blue-dot dot-right-3"></div>
       <div class="blue-dot dot-right-4"></div>
-      <!-- 오른쪽 내용 영역 (비워둠) -->
+      <!-- 로그인 폼 (박스 없이 심플하게) -->
+      <form style="min-width:320px;max-width:340px;width:100%;">
+        <table style="width:100%;border-collapse:separate;border-spacing:0 18px;">
+          <tr>
+            <td style="text-align:center;" colspan="1">
+              <h2 style="margin:0 0 18px 0; color:#174642; font-size:2.2rem;">로그인</h2>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input type="text" placeholder="ID"
+                style="width:100%;height:38px;font-size:17px;border:0;border-radius:15px;outline:none;padding-left:14px;background:#ffffff;box-shadow:0 1px 0 #b3b3b3;box-sizing:border-box;">
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input type="password" placeholder="Password"
+                style="width:100%;height:38px;font-size:17px;border:0;border-radius:15px;outline:none;padding-left:14px;background:#ffffff;box-shadow:0 1px 0 #b3b3b3;box-sizing:border-box;">
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input type="checkbox" id="saveLogin">
+              <label for="saveLogin" style="font-size:14px; color:#174642; margin-left:6px;">로그인 정보 저장</label>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input type="submit" value="Sign in"
+                style="width:100%;height:38px;font-size:17px;border:0;border-radius:15px;outline:none;background:#6e9c8f;color:#fff;cursor:pointer;box-shadow:0 2px 8px #0001;box-sizing:border-box;"
+                onclick="alert('로그인 성공!')">
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align:center;">
+              <a href="회원가입.html" style="font-size:13px;color:#6e9c8f;text-decoration:none;">회원가입</a>
+            </td>
+          </tr>
+        </table>
+      </form>
     </div>
     <!-- 오른쪽 추가 영역 -->
     <div class="side-area">
