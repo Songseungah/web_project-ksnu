@@ -3,163 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <title>diary</title>
+  <link rel="stylesheet" href="common.css">
   <style>
-    /* 전체 배경 및 중앙 정렬 */
-    body {
-      background-color: #6e9c8f ; /* 아주 연한 초록 */
-      margin: 0;
-      width: 100vw;
-      height: 100vh;
-      box-sizing: border-box;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
-    /* 전체 컨테이너: 초록 테두리와 내부 배경 */
-    .container {
-      background: #c8ded9; /* 연한 초록 */
-      border: 24px solid #174642; /* 중간 초록 */
-      border-radius: 0.5rem;
-      width: 90vw;
-      max-width: 1200px;
-      height: 95vh;
-      min-height: 600px;
-      display: flex;
-      box-sizing: border-box;
-    }
-    /* 왼쪽 사이드바: 프로필, 메뉴 목록 */
-    .sidebar {
-      width: 300px;
-      background: #ecf4f3; /* 아주 연한 초록 */
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding-top: 40px;
-      position: relative;
-      border-right: 6px solid #174642; /* 중간 초록 */
-    }
-    /* 프로필 원형 영역 */
-    .profile-circle {
-      width: 140px;
-      height: 140px;
-      background: #6e9c8f; /* 중간 초록 */
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-      color: #ecf4f3; /* 아주 연한 초록 */
-      margin-bottom: 40px;
-      font-weight: 500;
-      letter-spacing: 2px;
-    }
-    /* '목록' 텍스트 스타일 */
-    .sidebar-title {
-      font-size: 22px;
-      color: #174642; /* 진한 초록 */
-      margin-bottom: 30px;
-      align-self: flex-start;
-      margin-left: 30px;
-      font-weight: 400;
-    }
-    /* 메뉴 리스트 스타일 */
-    .menu {
-      display: flex;
-      flex-direction: column;
-      gap: 25px;
-      width: 100%;
-      align-items: flex-start;
-      margin-left: 40px;
-      margin-top: 10px;
-    }
-    /* 각 메뉴 항목 스타일 */
-    .menu-item {
-      text-decoration: none;
-      color: #174642; /* 진한 초록 */
-      font-size: 20px;
-      font-weight: 500;
-      transition: color 0.3s, transform 0.3s;
-    }
-    /* 메뉴 항목 호버 효과 */
-    .menu-item:hover {
-      color: #6e9c8f; /* 중간 초록 */
-      transform: scale(1.08);
-    }
-    /* 오른쪽 컨텐츠 영역 */
-    .content {
-      flex: 1;
-      background: #ecf4f3; /* 아주 연한 초록 */
-      /* 내용이 들어갈 자리 */
-      position: relative;
-      z-index: 2;
-    }
-    /* 오른쪽 추가 영역 스타일 */
-    .side-area {
-      width: 50px;
-      background: #174642; /* 중간 초록 */
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      padding-top: 30px;
-      gap: 10px;
-    }
-    /* 탭 버튼 스타일 */
-    .side-tab {
-      width: 70px;
-      height: 40px;
-      background: #ecf4f3; /* 아주 연한 초록 */
-      color: #174642; /* 진한 초록 */
-      border: none;
-      border-radius: 10px;
-      margin-bottom: 8px;
-      font-size: 20px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.2s, color 0.2s;
-      z-index: 1;
-    }
-    .side-tab.active, .side-tab:hover {
-      background: #c8ded9; /* 연한 초록 */
-      color: #174642; /* 진한 초록 */
-    }
-
-    /* 초록 점 스타일 */
-    .blue-dot {
-      width: 22px;
-      height: 22px;
-      background: #174642; /* 진한 초록 */
-      border-radius: 50%;
-      position: absolute;
-      z-index: 1;
-    }
-    /* 점 연결 바(둥근 사각형) */
-    .dot-connector {
-      position: absolute;
-      left: -40px; /* content 기준, 왼쪽 점 위치에 맞춤 */
-      width: 70px; /* 점 간 거리(조정 가능) */
-      height: 16px;
-      background: #6e9c8f; /* 중간 초록 */
-      border-radius: 12px;
-      z-index: 2;
-    }
-    .connector-1 { top: 40px; }
-    .connector-2 { top: 82px; }
-    .connector-3 { bottom: 122px; }
-    .connector-4 { bottom: 82px; }
-    /* 왼쪽 점 4개 */
-    .dot-left-1 { left: 260px; top: 38px; }
-    .dot-left-2 { left: 260px; top: 80px; }
-    .dot-left-3 { left: 260px; bottom: 120px; }
-    .dot-left-4 { left: 260px; bottom: 80px; }
-    /* 오른쪽 점 4개 */
-    .dot-right-1 { right: 760px; top: 38px; }
-    .dot-right-2 { right: 760px; top: 80px; }
-    .dot-right-3 { right: 760px; bottom: 120px; }
-    .dot-right-4 { right: 760px; bottom: 80px; }
+    /* diary.html만의 개별 스타일만 남기고 공통 스타일 제거 */
     .todo-memo-area {
       width: 92%;
       margin-top: 40px;
@@ -259,7 +105,6 @@
       margin-top: 5px;
     }
     .calendar-sheet {
-      /* background: #fff; */
       border-radius: 18px;
       box-shadow: none;
       width: 700px;
@@ -349,6 +194,30 @@
     </div>
     <!-- 오른쪽 내용 영역 -->
     <div class="content">
+      <!-- 오른쪽 상단 +버튼 추가 -->
+      <button 
+        onclick="location.href='add_diary.html'" 
+        style="
+          position: absolute;
+          top: 32px;
+          right: 48px;
+          z-index: 10;
+          background: #6e9c8f;
+          color: #fff;
+          border: none;
+          border-radius: 50%;
+          width: 44px;
+          height: 44px;
+          font-size: 2rem;
+          cursor: pointer;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: background 0.2s;
+        "
+        title="다이어리 추가"
+      >+</button>
       <!-- 점 연결 바(둥근 사각형) 4개 -->
       <div class="dot-connector connector-1"></div>
       <div class="dot-connector connector-2"></div>
@@ -362,7 +231,7 @@
       <!-- 오른쪽 내용 영역 (비워둠) -->
       <div class="calendar-area">
         <div class="calendar-sheet">
-          <div class="calendar-month">09</div>
+          <div class="calendar-month">05</div>
           <table class="calendar-table">
             <thead>
               <tr>
@@ -382,23 +251,47 @@
                 <td class="empty"></td>
                 <td class="empty"></td>
                 <td class="empty"></td>
-                <td class="sat">1</td>
-                <td class="sun">2</td>
+                <td class="sat"><a href="diary_detail.html" style="color:inherit;text-decoration:none;">1</a></td>
+                <td class="sun"><a href="diary_detail.html" style="color:inherit;text-decoration:none;">2</a></td>
               </tr>
               <tr>
-                <td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td class="sat">8</td><td class="sun">9</td>
+                <td><a href="diary_detail.html" style="color:inherit;text-decoration:none;">3</a></td>
+                <td><a href="diary_detail.html" style="color:inherit;text-decoration:none;">4</a></td>
+                <td><a href="diary_detail.html" style="color:inherit;text-decoration:none;">5</a></td>
+                <td><a href="diary_detail.html" style="color:inherit;text-decoration:none;">6</a></td>
+                <td><a href="diary_detail.html" style="color:inherit;text-decoration:none;">7</a></td>
+                <td class="sat"><a href="diary_detail.html" style="color:inherit;text-decoration:none;">8</a></td>
+                <td class="sun"><a href="diary_detail.html" style="color:inherit;text-decoration:none;">9</a></td>
               </tr>
               <tr>
-                <td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td class="sat">15</td><td class="sun">16</td>
+                <td><a href="diary_detail.html" style="color:inherit;text-decoration:none;">10</a></td>
+                <td><a href="diary_detail.html" style="color:inherit;text-decoration:none;">11</a></td>
+                <td><a href="diary_detail.html" style="color:inherit;text-decoration:none;">12</a></td>
+                <td><a href="diary_detail.html" style="color:inherit;text-decoration:none;">13</a></td>
+                <td><a href="diary_detail.html" style="color:inherit;text-decoration:none;">14</a></td>
+                <td class="sat"><a href="diary_detail.html" style="color:inherit;text-decoration:none;">15</a></td>
+                <td class="sun"><a href="diary_detail.html" style="color:inherit;text-decoration:none;">16</a></td>
               </tr>
               <tr>
-                <td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td class="sat">22</td><td class="sun">23</td>
+                <td><a href="diary_detail.html" style="color:inherit;text-decoration:none;">17</a></td>
+                <td><a href="diary_detail.html" style="color:inherit;text-decoration:none;">18</a></td>
+                <td><a href="diary_detail.html" style="color:inherit;text-decoration:none;">19</a></td>
+                <td><a href="diary_detail.html" style="color:inherit;text-decoration:none;">20</a></td>
+                <td><a href="diary_detail.html" style="color:inherit;text-decoration:none;">21</a></td>
+                <td class="sat"><a href="diary_detail.html" style="color:inherit;text-decoration:none;">22</a></td>
+                <td class="sun"><a href="diary_detail.html" style="color:inherit;text-decoration:none;">23</a></td>
               </tr>
               <tr>
-                <td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td class="sat">29</td><td class="sun">30</td>
+                <td><a href="diary_detail.html" style="color:inherit;text-decoration:none;">24</a></td>
+                <td><a href="diary_detail.html" style="color:inherit;text-decoration:none;">25</a></td>
+                <td><a href="diary_detail.html" style="color:inherit;text-decoration:none;">26</a></td>
+                <td><a href="diary_detail.html" style="color:inherit;text-decoration:none;">27</a></td>
+                <td><a href="diary_detail.html" style="color:inherit;text-decoration:none;">28</a></td>
+                <td class="sat"><a href="diary_detail.html" style="color:inherit;text-decoration:none;">29</a></td>
+                <td class="sun"><a href="diary_detail.html" style="color:inherit;text-decoration:none;">30</a></td>
               </tr>
               <tr>
-                <td class="empty"></td>
+                <td><a href="diary_detail.html" style="color:inherit;text-decoration:none;">31</a></td>
                 <td class="empty"></td>
                 <td class="empty"></td>
                 <td class="empty"></td>

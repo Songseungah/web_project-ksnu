@@ -3,150 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <title>메인 메뉴</title>
+  <link rel="stylesheet" href="common.css">
   <style>
-    body {
-      background-color: #6e9c8f;
-      margin: 0;
-      width: 100vw;
-      height: 100vh;
-      box-sizing: border-box;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
-    .container {
-      background: #c8ded9;
-      border: 24px solid #174642;
-      border-radius: 0.5rem;
-      width: 90vw;
-      max-width: 1200px;
-      height: 95vh;
-      min-height: 600px;
-      display: flex;
-      box-sizing: border-box;
-    }
-    .sidebar {
-      width: 300px;
-      background: #ecf4f3;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding-top: 40px;
-      position: relative;
-      border-right: 6px solid #174642;
-    }
-    .profile-circle {
-      width: 140px;
-      height: 140px;
-      background: #6e9c8f;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-      color: #ecf4f3;
-      margin-bottom: 20px;
-      font-weight: 500;
-      letter-spacing: 2px;
-    }
-    .profile-name {
-      font-size: 20px;
-      font-weight: bold;
-      color: #174642;
-      margin-bottom: 10px;
-    }
-    .profile-message {
-      font-size: 14px;
-      color: #555;
-      text-align: center;
-      padding: 0 10px;
-      margin-bottom: 20px;
-    }
-    .sidebar-info {
-      font-size: 14px;
-      color: #174642;
-      text-align: left;
-      width: 80%;
-      margin-bottom: 30px;
-    }
-    .sidebar-info strong {
-      display: block;
-      margin-bottom: 5px;
-    }
-    .sidebar-info ul {
-      padding-left: 20px;
-      line-height: 1.6;
-      margin: 0;
-    }
-
-    .content {
-      flex: 1;
-      background: #ecf4f3;
-      position: relative;
-      z-index: 2;
-    }
-    .side-area {
-      width: 50px;
-      background: #174642;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      padding-top: 30px;
-      gap: 10px;
-    }
-    .side-tab {
-      width: 70px;
-      height: 40px;
-      background: #ecf4f3;
-      color: #174642;
-      border: none;
-      border-radius: 10px;
-      margin-bottom: 8px;
-      font-size: 20px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.2s, color 0.2s;
-      z-index: 1;
-      text-decoration: none;
-    }
-    .side-tab.active, .side-tab:hover {
-      background: #c8ded9;
-      color: #174642;
-    }
-
-    .blue-dot {
-      width: 22px;
-      height: 22px;
-      background: #174642;
-      border-radius: 50%;
-      position: absolute;
-      z-index: 1;
-    }
-    .dot-connector {
-      position: absolute;
-      left: -40px;
-      width: 70px;
-      height: 16px;
-      background: #6e9c8f;
-      border-radius: 12px;
-      z-index: 2;
-    }
-    .connector-1 { top: 40px; }
-    .connector-2 { top: 82px; }
-    .connector-3 { bottom: 122px; }
-    .connector-4 { bottom: 82px; }
-    .dot-left-1 { left: 260px; top: 38px; }
-    .dot-left-2 { left: 260px; top: 80px; }
-    .dot-left-3 { left: 260px; bottom: 120px; }
-    .dot-left-4 { left: 260px; bottom: 80px; }
-    .dot-right-1 { right: 760px; top: 38px; }
-    .dot-right-2 { right: 760px; top: 80px; }
-    .dot-right-3 { right: 760px; bottom: 120px; }
-    .dot-right-4 { right: 760px; bottom: 80px; }
+    /* main.html만의 개별 스타일이 있다면 여기에 작성 */
   </style>
 </head>
 <body>
@@ -175,67 +34,66 @@
       <div class="blue-dot dot-left-4"></div>
     </div>
 
-    <!-- 기존 내용 생략 -->
-<!-- 오른쪽 내용 영역 -->
-<div class="content">
-  <!-- 점 연결 바(둥근 사각형) 4개 -->
-  <div class="dot-connector connector-1"></div>
-  <div class="dot-connector connector-2"></div>
-  <div class="dot-connector connector-3"></div>
-  <div class="dot-connector connector-4"></div>
-  <!-- 오른쪽 파란 점 4개 -->
-  <div class="blue-dot dot-right-1"></div>
-  <div class="blue-dot dot-right-2"></div>
-  <div class="blue-dot dot-right-3"></div>
-  <div class="blue-dot dot-right-4"></div>
+    <!-- 오른쪽 내용 영역 -->
+    <div class="content">
+      <!-- 점 연결 바(둥근 사각형) 4개 -->
+      <div class="dot-connector connector-1"></div>
+      <div class="dot-connector connector-2"></div>
+      <div class="dot-connector connector-3"></div>
+      <div class="dot-connector connector-4"></div>
+      <!-- 오른쪽 파란 점 4개 -->
+      <div class="blue-dot dot-right-1"></div>
+      <div class="blue-dot dot-right-2"></div>
+      <div class="blue-dot dot-right-3"></div>
+      <div class="blue-dot dot-right-4"></div>
 
-  <!-- ✅ 홈 콘텐츠 추가 -->
-  <div style="padding: 40px; font-family: 'Arial', sans-serif; color: #174642; ">
-    <!-- 오늘 날짜와 인사말 -->
-    <div style="margin-bottom: 30px;">
-      <h2 style="margin: 0;">2025년 5월 26일</h2>
-      <p style="margin-top: 8px; font-size: 18px;">오늘 하루도 좋은 하루 되세요 😊</p>
-    </div>
+      <!-- ✅ 홈 콘텐츠 추가 -->
+      <div style="padding: 40px; font-family: 'Arial', sans-serif; color: #174642; ">
+        <!-- 오늘 날짜와 인사말 -->
+        <div style="margin-bottom: 30px;">
+          <h2 style="margin: 0;">2025년 5월 26일</h2>
+          <p style="margin-top: 8px; font-size: 18px;">오늘 하루도 좋은 하루 되세요 😊</p>
+        </div>
 
-    <!-- 오늘의 기분 -->
-    <div style="margin-bottom: 30px;">
-      <p style="margin-bottom: 10px;">오늘 기분은 어떤가요?</p>
-      <div style="font-size: 28px; display: flex; gap: 12px;">
-        <span title="행복">😄</span>
-        <span title="보통">😐</span>
-        <span title="슬픔">😢</span>
-        <span title="화남">😡</span>
-        <span title="피곤">😴</span>
+        <!-- 오늘의 기분 -->
+        <div style="margin-bottom: 30px;">
+          <p style="margin-bottom: 10px;">오늘 기분은 어떤가요?</p>
+          <div style="font-size: 28px; display: flex; gap: 12px;">
+            <span title="행복">😄</span>
+            <span title="보통">😐</span>
+            <span title="슬픔">😢</span>
+            <span title="화남">😡</span>
+            <span title="피곤">😴</span>
+          </div>
+        </div>
+
+        <!-- 최근 다이어리 -->
+        <div style="margin-bottom: 30px;">
+          <h3 style="margin-bottom: 10px;">📔 최근 다이어리</h3>
+          <ul style="padding-left: 20px; line-height: 1.6;">
+            <li>5월 25일 - 좋은 하루</li>
+            <li>5월 24일 - 비 오는 날</li>
+            <li>5월 23일 - 친구랑 카페</li>
+          </ul>
+        </div>
+
+        <!-- 오늘의 추천 노래 -->
+        <div style="margin-bottom: 30px;">
+          <h3 style="margin-bottom: 10px;">🎵 오늘의 추천 노래</h3>
+          <audio controls style="width: 100%; max-width: 400px;">
+            <source src="music/today_song.mp3" type="audio/mp3">
+            브라우저가 오디오를 지원하지 않습니다.
+          </audio>
+        </div>
+
+        <!-- 게임 미션 -->
+        <div>
+          <h3 style="margin-bottom: 10px;">🎮 오늘의 게임 미션</h3>
+          <p>기억력 테스트에 도전해 보세요!</p>
+          <a href="game.html" style="display: inline-block; margin-top: 8px; text-decoration: none; color: #174642; font-weight: bold;">→ 게임 시작</a>
+        </div>
       </div>
     </div>
-
-    <!-- 최근 다이어리 -->
-    <div style="margin-bottom: 30px;">
-      <h3 style="margin-bottom: 10px;">📔 최근 다이어리</h3>
-      <ul style="padding-left: 20px; line-height: 1.6;">
-        <li>5월 25일 - 좋은 하루</li>
-        <li>5월 24일 - 비 오는 날</li>
-        <li>5월 23일 - 친구랑 카페</li>
-      </ul>
-    </div>
-
-    <!-- 오늘의 추천 노래 -->
-    <div style="margin-bottom: 30px;">
-      <h3 style="margin-bottom: 10px;">🎵 오늘의 추천 노래</h3>
-      <audio controls style="width: 100%; max-width: 400px;">
-        <source src="music/today_song.mp3" type="audio/mp3">
-        브라우저가 오디오를 지원하지 않습니다.
-      </audio>
-    </div>
-
-    <!-- 게임 미션 -->
-    <div>
-      <h3 style="margin-bottom: 10px;">🎮 오늘의 게임 미션</h3>
-      <p>기억력 테스트에 도전해 보세요!</p>
-      <a href="game.html" style="display: inline-block; margin-top: 8px; text-decoration: none; color: #174642; font-weight: bold;">→ 게임 시작</a>
-    </div>
-  </div>
-</div>
 
 
     <!-- 오른쪽 탭 영역 -->
