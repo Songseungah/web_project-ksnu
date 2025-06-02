@@ -3,353 +3,387 @@
 <head>
   <meta charset="UTF-8">
   <title>음악</title>
+  <link rel="stylesheet" href="common.css">
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #111;
-      color: white;
-      display: flex;
-      height: 100vh;
-    }
-
-    /* 왼쪽 사이드바 스타일 */
-    .sidebar {
-      width: 250px;
-      background-color: #222;
-      padding: 20px;
-      box-sizing: border-box;
+    /* 음악 페이지 개별 스타일 */
+    .music-content-area {
+      margin-top: 60px;
+      margin-left: 40px;
+      margin-right: 40px;
       display: flex;
       flex-direction: column;
-      gap: 20px;
-    }
-
-    .sidebar .logo {
-      font-size: 24px;
-      font-weight: bold;
-      color: yellow;
-      margin-bottom: 20px;
-    }
-
-    .sidebar a {
-      color: white;
-      text-decoration: none;
-      font-size: 18px;
-      padding: 10px;
-      border-radius: 5px;
-      transition: background-color 0.3s, color 0.3s;
-    }
-
-    .sidebar a:hover {
-      background-color: #333;
-      color: orange;
-    }
-
-    /* 검색바 스타일 */
-    .sidebar input {
-      width: 90%;
-      padding: 10px;
-      margin-bottom: 20px;
-      border: none;
-      border-radius: 5px;
-      background-color: #333;
-      color: white;
-      font-size: 16px;
-    }
-
-    .sidebar input::placeholder {
-      color: #aaa;
-    }
-
-    /* 상단 바 스타일 */
-    .navbar {
-      width: calc(100%);
-      background-color: #222;
-      padding: 10px 20px;
-      box-sizing: border-box;
-      display: flex;
-      justify-content: space-between;
       align-items: center;
+      min-height: 80%;
     }
-
-    /* 메인 콘텐츠 스타일 */
-    .content {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      overflow-y: auto;
+    .music-title {
+      font-size: 2rem;
+      color: #174642;
+      font-weight: bold;
+      margin-bottom: 24px;
+      letter-spacing: -1px;
+      text-align: center;
     }
-
-    .content h1 {
-      font-size: 28px;
-      margin: 20px;
-    }
-
     .albums {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 20px;
-      padding: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 24px;
+      width: 100%;
+      max-width: 800px;
+      margin-bottom: 40px;
     }
-
     .album-card {
-      background-color: #222;
-      border-radius: 10px;
+      background: #ecf4f3;
+      border-radius: 18px;
       overflow: hidden;
       text-align: center;
       transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 4px 18px 0 rgba(110, 156, 143, 0.13), 0 1.5px 0 #c8ded9;
+      border: 2px solid #c8ded9;
+      padding-bottom: 10px;
+      position: relative;
     }
-
     .album-card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+      transform: scale(1.04);
+      box-shadow: 0 8px 24px 0 rgba(110, 156, 143, 0.18), 0 2px 0 #6e9c8f;
+      border-color: #6e9c8f;
     }
-
     .album-card img {
       width: 100%;
-      height: 200px;
+      height: 160px;
       object-fit: cover;
+      border-bottom: 1.5px solid #c8ded9;
+      background: #fff;
     }
-
     .album-card h3 {
-      margin: 10px 0;
-      font-size: 18px;
+      margin: 16px 0 4px 0;
+      font-size: 19px;
+      color: #174642;
+      font-weight: 700;
+      letter-spacing: -1px;
     }
-
     .album-card p {
-      margin: 0 0 10px;
-      font-size: 14px;
-      color: #aaa;
+      margin: 0 0 10px 0;
+      font-size: 15px;
+      color: #6e9c8f;
+      font-weight: 500;
     }
-
-    /* 재생 버튼 스타일 */
-    .control-button {
-      background-color: transparent; /* 박스 제거 */
-      color: rgb(132, 130, 130);
-      border: none;
-      font-size: 20px;
-      cursor: pointer;
-      transition: color 0.3s, transform 0.2s;
-    }
-
-    .control-button:hover {
-      color: white; /* 밝아짐 효과 */
-      transform: scale(1.2);
-    }
-
-    .control-button:active {
-      transform: scale(1.1);
-    }
-
-    .controls {
-      display: flex;
-      align-items: center;
-    }
-
-    /* 둥근 직사각형 스타일 */
+    /* 둥근 사각형 스타일 (플레이바) */
     .rounded-box {
       display: flex;
-      width: 500px;
-      height: 50px;
-      background-color: #333;
-      border-radius: 10px;
-      overflow: hidden; /* 내부 요소가 둥근 모서리를 벗어나지 않도록 */
+      width: 520px;
+      height: 54px;
+      background: #ecf4f3;
+      border-radius: 16px;
+      overflow: hidden;
       position: relative;
+      margin: 0 auto 32px auto;
+      box-shadow: 0 4px 18px 0 rgba(110, 156, 143, 0.10), 0 1.5px 0 #c8ded9;
+      border: 2px solid #c8ded9;
     }
-
     .rounded-box .highlight {
-      flex: 1; /* 1의 영역 */
-      background-color: #555; /* 더 진한 색상 */
+      flex: 1;
+      background: linear-gradient(90deg, #c8ded9 60%, #6e9c8f 100%);
       position: relative;
-      cursor: pointer; /* 클릭 가능 표시 */
+      cursor: pointer;
+      transition: background 0.2s;
     }
-
     .rounded-box:hover .highlight::after {
-      content: '↸'; /* 화살표 표시 */
+      content: '↸';
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      font-size: 20px;
-      color: white;
+      font-size: 22px;
+      color: #174642;
+      font-weight: bold;
     }
-
     .rounded-box .remaining {
-      flex: 9; /* 9의 영역 */
-      background-color: #333; /* 기존 색상 */
+      flex: 9;
+      background: #ecf4f3;
     }
-
-    /* 사운드 바 스타일 */
+    /* 플레이어 컨트롤 */
+    .controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 18px;
+      background: #ecf4f3;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px 0 rgba(110, 156, 143, 0.08);
+      padding: 10px 24px;
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .control-button {
+      background-color: #c8ded9;
+      color: #174642;
+      border: none;
+      font-size: 22px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: color 0.3s, background 0.2s, transform 0.2s;
+      margin: 0 2px;
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 1px 4px #b3b3b3;
+    }
+    .control-button:hover {
+      background: #6e9c8f;
+      color: #fff;
+      transform: scale(1.13);
+    }
+    .control-button:active {
+      background: #174642;
+      color: #fff;
+      transform: scale(1.07);
+    }
+    /* 사운드 바 */
     .sound-bar {
       display: flex;
       align-items: center;
       width: 150px;
-      margin-left: 20px;
+      margin-left: 18px;
+      color: #174642;
+      font-size: 18px;
+      background: #c8ded9;
+      border-radius: 8px;
+      padding: 4px 10px;
+      box-shadow: 0 1px 4px #b3b3b3;
     }
-
     .sound-slider {
       width: 70px;
-      -webkit-appearance: none; /* 벤더 접두사 */
-      appearance: none; /* 표준 속성 */
-      background: #444;
-      height: 2px;
+      -webkit-appearance: none;
+      appearance: none;
+      background: #6e9c8f;
+      height: 4px;
       border-radius: 5px;
       outline: none;
       cursor: pointer;
       transition: background 0.3s;
+      margin-left: 8px;
     }
-
     .sound-slider:hover {
-      background: #666;
+      background: #174642;
     }
-
     .sound-slider::-webkit-slider-thumb {
       -webkit-appearance: none;
-      appearance: none; /* 표준 속성 */
-      width: 10px;
-      height: 10px;
-      background: white;
+      appearance: none;
+      width: 14px;
+      height: 14px;
+      background: #174642;
       border-radius: 50%;
       cursor: pointer;
       transition: background 0.3s;
+      border: 2px solid #ecf4f3;
     }
-
     .sound-slider::-webkit-slider-thumb:hover {
-      background: white;
+      background: #6e9c8f;
     }
-
+    /* 사이드바 스타일 */
+    .sidebar {
+      width: 300px;
+      background: #ecf4f3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 40px;
+      position: relative;
+      border-right: 6px solid #174642;
+    }
+    .sidebar-menu {
+      width: 90%;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 18px 0 18px 0;
+      background: none;
+      box-shadow: none;
+      border: none;
+      padding: 0;
+    }
+    .sidebar-menu a {
+      display: block;
+      background: none;
+      color: #174642 !important;
+      font-size: 18px;
+      font-weight: 500;
+      border-radius: 14px;
+      padding: 10px 0 10px 24px;
+      margin: 0;
+      text-decoration: none;
+      transition: background 0.18s, color 0.18s;
+      letter-spacing: -1px;
+      border: none;
+      position: relative;
+    }
+    .sidebar-menu a:hover,
+    .sidebar-menu a.active {
+      background: #c8ded9;
+      color: #174642 !important;
+    }
     .sidebar-select {
       width: 80%;
       padding: 10px;
       border: none;
-      border-radius: 5px;
-      background-color: #333;
+      border-radius: 8px;
+      background-color: #07351c;
       color: white;
       font-size: 16px;
-      margin-top: 10px;
+      margin-top: 18px;
+      margin-bottom: 18px;
       cursor: pointer;
     }
-
     .sidebar-select:hover {
-      background-color: #444;
+      background-color: #267e4c;
+    }
+    /* 점과 연결바가 겹치지 않도록 마진 조정 */
+    .music-content-area {
+      margin-top: 90px;
+      margin-bottom: 60px;
+      margin-left: 80px;
+      margin-right: 80px;
     }
   </style>
 </head>
 <body>
-  <!-- 왼쪽 사이드바 -->
-  <div class="sidebar">
-    <div class="logo">음악</div>
-    <input type="text" placeholder="검색">
-    <a href="#" onclick="showSection('home')">홈</a>
-    <a href="#" onclick="showSection('music')">새로운 음악</a>
-    <a href="#" onclick="showSection('radio')">라디오</a>
-    <a href="#" onclick="showSection('box')">보관함</a>
-    <a href="#" onclick="showSection('playlist')">플레이리스트</a>
-    <a href="main.html">메인 화면</a>
-  </div>
-
-  <!-- 메인 콘텐츠 -->
-  <div class="content">
-    <!-- 상단 바 -->
-    <div class="navbar">
-        <div></div>
-      <div class="controls">
-        <button class="control-button">⇄</button>
-        <button class="control-button">⯬</button>
-        <button class="control-button">▶</button>
-        <button class="control-button">⯮</button>
-        <button class="control-button">⟲</button>
-      </div>
-      <div class="rounded-box">
-        <div class="highlight" onclick="location.href='music_detail.html'"></div> <!-- 클릭 시 이동 -->
-        <div class="remaining"></div>
-      </div> <!-- 둥근 직사각형 추가 -->
-      <div class="sound-bar">
-        🔊 <input type="range" min="0" max="100" value="30" class="sound-slider">
-      </div>
-      <div class="section"> 
-        
+  <div class="container">
+    <!-- 왼쪽 사이드바 -->
+    <div class="sidebar">
+      <div class="logo" style="font-size:28px; color:#174642; font-weight:bold; margin-bottom:30px;">음악</div>
+      <nav class="sidebar-menu">
+        <a href="#" onclick="showSection('home')" id="menu-home">홈</a>
+        <a href="#" onclick="showSection('music')" id="menu-music">새로운 음악</a>
+        <a href="#" onclick="showSection('radio')" id="menu-radio">라디오</a>
+        <a href="#" onclick="showSection('box')" id="menu-box">보관함</a>
+        <a href="#" onclick="showSection('playlist')" id="menu-playlist">플레이리스트</a>
+      </nav>
       <select class="sidebar-select">
         <option value="profile">프로필</option>
         <option value="preferences">환경 설정</option>
         <option value="logout">로그아웃</option>
       </select>
+      <!-- 왼쪽 점 4개 -->
+      <div class="blue-dot dot-left-1"></div>
+      <div class="blue-dot dot-left-2"></div>
+      <div class="blue-dot dot-left-3"></div>
+      <div class="blue-dot dot-left-4"></div>
     </div>
+    <!-- 오른쪽 내용 영역 -->
+    <div class="content">
+      <!-- 점 연결 바(둥근 사각형) 4개 -->
+      <div class="dot-connector connector-1"></div>
+      <div class="dot-connector connector-2"></div>
+      <div class="dot-connector connector-3"></div>
+      <div class="dot-connector connector-4"></div>
+      <!-- 오른쪽 파란 점 4개 -->
+      <div class="blue-dot dot-right-1"></div>
+      <div class="blue-dot dot-right-2"></div>
+      <div class="blue-dot dot-right-3"></div>
+      <div class="blue-dot dot-right-4"></div>
+      <!-- 음악 메인 컨텐츠 -->
+      <div class="music-content-area">
+         <!-- 둥근 사각형 플레이바 -->
+        <div class="rounded-box" style="margin-bottom:32px;">
+          <div class="highlight" onclick="location.href='music_detail.html'"></div>
+          <div class="remaining"></div>
+        </div>
+        <!-- 플레이어 컨트롤 -->
+        <div class="controls">
+          <button class="control-button">⇄</button>
+          <button class="control-button">⯬</button>
+          <button class="control-button">▶</button>
+          <button class="control-button">⯮</button>
+          <button class="control-button">⟲</button>
+          <div class="sound-bar">
+            🔊 <input type="range" min="0" max="100" value="30" class="sound-slider">
+          </div>
+        </div>
+
+        <!-- 섹션별 컨텐츠 -->
+        <section id="home">
+          <div class="music-title">홈</div>
+          <p style="color:#174642; font-size:1.1rem;">환영합니다! 여기에 홈 콘텐츠를 추가하세요.</p>
+        </section>
+        <section id="music" style="display:none;">
+          <div class="music-title">새로운 음악</div>
+          <div class="albums">
+            <div class="album-card">
+              <img src="https://via.placeholder.com/200" alt="앨범 이미지">
+              <h3>앨범 제목 1</h3>
+              <p>아티스트 1</p>
+            </div>
+            <div class="album-card">
+              <img src="https://via.placeholder.com/200" alt="앨범 이미지">
+              <h3>앨범 제목 2</h3>
+              <p>아티스트 2</p>
+            </div>
+            <div class="album-card">
+              <img src="https://via.placeholder.com/200" alt="앨범 이미지">
+              <h3>앨범 제목 3</h3>
+              <p>아티스트 3</p>
+            </div>
+            <div class="album-card">
+              <img src="https://via.placeholder.com/200" alt="앨범 이미지">
+              <h3>앨범 제목 4</h3>
+              <p>아티스트 4</p>
+            </div>
+          </div>
+        </section>
+        <section id="radio" style="display:none;">
+          <div class="music-title">라디오</div>
+          <p style="color:#174642;">라디오 방송 목록</p>
+        </section>
+        <section id="box" style="display:none;">
+          <div class="music-title">보관함</div>
+          <p style="color:#174642;">보관함 내용</p>
+        </section>
+        <section id="playlist" style="display:none;">
+          <div class="music-title">플레이리스트</div>
+          <p style="color:#174642;">플레이리스트 내용</p>
+        </section>
+      </div>
     </div>
-
-    <!-- 홈 섹션 -->
-    <section id="home">
-      <h1>홈</h1>
-      <p>환영합니다! 여기에 홈 콘텐츠를 추가하세요.</p>
-      <!-- 홈 콘텐츠 추가 --> 
-    </section>
-
-    <!-- 앨범 섹션 -->
-    <section id="music">
-    <h1>새로운 음악</h1>
-    <div class="albums">
-      <div class="album-card">
-        <img src="https://via.placeholder.com/200" alt="앨범 이미지">
-        <h3>앨범 제목 1</h3>
-        <p>아티스트 1</p>
-      </div>
-      <div class="album-card">
-        <img src="https://via.placeholder.com/200" alt="앨범 이미지">
-        <h3>앨범 제목 2</h3>
-        <p>아티스트 2</p>
-      </div>
-      <div class="album-card">
-        <img src="https://via.placeholder.com/200" alt="앨범 이미지">
-        <h3>앨범 제목 3</h3>
-        <p>아티스트 3</p>
-      </div>
-      <div class="album-card">
-        <img src="https://via.placeholder.com/200" alt="앨범 이미지">
-        <h3>앨범 제목 4</h3>
-        <p>아티스트 4</p>
-      </div>
+    <!-- 오른쪽 탭 영역 -->
+    <div class="side-area">
+      <a href="main.html" class="side-tab" title="홈">&#8962;</a>
+      <a href="diary.html" class="side-tab" title="다이어리">📔</a>
+      <a href="music.html" class="side-tab active" title="음악">🎵</a>
+      <a href="game.html" class="side-tab" title="게임">🎮</a>
+      <button class="side-tab" title="메세지">💬</button>
+      <button class="side-tab" title="설정">&#9881;</button>
+      <button class="side-tab" title="정보">&#8505;</button>
+      <a href="로그인.html" class="side-tab" title="로그아웃">&#10162;</a>
+      <button class="side-tab" title="목록">&#9776;</button>
     </div>
-    </section>
-
-    <!-- 라디오 섹션 -->
-     <section id="radio" style="display: none;">
-      <h1>라디오</h1>
-      <p>라디오 방송 목록</p>
-      <!-- 라디오 방송 목록 추가 -->
-    </section>
-
-    <!-- 보관함 섹션 -->
-    <section id="box" style="display: none;">
-      <h1>보관함</h1>
-      <p>보관함 내용</p>
-      <!-- 보관함 내용 추가 -->
-    </section>
-
-    <!-- 플레이리스트 섹션 -->
-    <section id="playlist" style="display: none;">
-      <h1>플레이리스트</h1>
-      <p>플레이리스트 내용</p>
-      <!-- 플레이리스트 내용 추가 -->
-    </section>
-
-    
   </div>
-
   <script>
-  // 페이지 로드 시 홈 섹션만 표시
-  document.addEventListener('DOMContentLoaded', () => {
-    showSection('home');
-  });
-
-  function showSection(sectionId) {
-    // 모든 섹션 숨기기
-    document.querySelectorAll('section').forEach((section) => {
-      section.style.display = 'none';
+    // 페이지 로드 시 홈 섹션만 표시
+    document.addEventListener('DOMContentLoaded', () => {
+      showSection('home');
     });
-
-    // 선택된 섹션 표시
-    document.getElementById(sectionId).style.display = 'block';
-  }
-</script>
+    function showSection(sectionId) {
+      document.querySelectorAll('.music-content-area section').forEach((section) => {
+        section.style.display = 'none';
+      });
+      document.getElementById(sectionId).style.display = 'block';
+      // 메뉴 active 효과
+      document.querySelectorAll('.sidebar-menu a').forEach(a => a.classList.remove('active'));
+      const menuMap = {
+        home: 'menu-home',
+        music: 'menu-music',
+        radio: 'menu-radio',
+        box: 'menu-box',
+        playlist: 'menu-playlist'
+      };
+      if (menuMap[sectionId]) {
+        document.getElementById(menuMap[sectionId]).classList.add('active');
+      }
+    }
+  </script>
 </body>
 </html>

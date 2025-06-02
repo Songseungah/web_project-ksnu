@@ -8,7 +8,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "Open game.html",
-            "file": "c:\\Users\\thdtm\\바탕 화면\\컴퓨터공학파일\\웹프로그래밍\\html\\game.html"
+            "file": "C:\\Users\\thdtm\\바탕 화면\\web-project\\로그인.html"
         }
     ]
 }
