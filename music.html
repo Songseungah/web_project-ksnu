@@ -7,9 +7,10 @@
   <style>
     /* 음악 페이지 개별 스타일 */
     .music-content-area {
-      margin-top: 60px;
-      margin-left: 40px;
-      margin-right: 40px;
+      margin-top: 30px; /* 기존 90px → 30px으로 위로 */
+      margin-bottom: 60px;
+      margin-left: 80px;
+      margin-right: 80px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -70,18 +71,25 @@
     /* 둥근 사각형 스타일 (플레이바) */
     .rounded-box {
       display: flex;
-      width: 520px;
-      height: 54px;
-      background: #ecf4f3;
-      border-radius: 16px;
+      margin: 0;
+      min-width: 180px;
+      max-width: 320px;
+      width: 320px;
+      height: 38px;
+      border-radius: 12px;
+      font-size: 14px;
+      flex: 2 1 220px;
+      box-sizing: border-box;
       overflow: hidden;
       position: relative;
-      margin: 0 auto 32px auto;
+      margin: 0 auto 24px auto; /* 기존 32px → 24px으로 위로 */
       box-shadow: 0 4px 18px 0 rgba(110, 156, 143, 0.10), 0 1.5px 0 #c8ded9;
       border: 2px solid #c8ded9;
     }
     .rounded-box .highlight {
       flex: 1;
+      min-width: 30px;
+      height: 100%;
       background: linear-gradient(90deg, #c8ded9 60%, #6e9c8f 100%);
       position: relative;
       cursor: pointer;
@@ -99,6 +107,7 @@
     }
     .rounded-box .remaining {
       flex: 9;
+      height: 100%;
       background: #ecf4f3;
     }
     /* 플레이어 컨트롤 */
@@ -107,7 +116,7 @@
       align-items: center;
       justify-content: center;
       gap: 12px;
-      margin-bottom: 18px;
+      margin-bottom: 10px; /* 기존 18px → 10px으로 위로 */
       background: #ecf4f3;
       border-radius: 12px;
       box-shadow: 0 2px 8px 0 rgba(110, 156, 143, 0.08);
@@ -115,18 +124,24 @@
       width: fit-content;
       margin-left: auto;
       margin-right: auto;
+      min-width: 180px;
+      max-width: 220px;
+      flex: 1 1 180px;
+      box-sizing: border-box;
+      padding: 6px 10px;
+      gap: 8px;
     }
     .control-button {
       background-color: #c8ded9;
       color: #174642;
       border: none;
-      font-size: 22px;
-      border-radius: 8px;
+      font-size: 18px;
+      border-radius: 7px;
       cursor: pointer;
       transition: color 0.3s, background 0.2s, transform 0.2s;
       margin: 0 2px;
-      width: 38px;
-      height: 38px;
+      width: 30px;
+      height: 30px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -146,26 +161,26 @@
     .sound-bar {
       display: flex;
       align-items: center;
-      width: 150px;
-      margin-left: 18px;
+      width: 90px;
+      margin-left: 8px;
       color: #174642;
-      font-size: 18px;
+      font-size: 15px;
       background: #c8ded9;
       border-radius: 8px;
-      padding: 4px 10px;
+      padding: 2px 6px;
       box-shadow: 0 1px 4px #b3b3b3;
     }
     .sound-slider {
-      width: 70px;
+      width: 40px;
+      height: 3px;
+      margin-left: 5px;
       -webkit-appearance: none;
       appearance: none;
       background: #6e9c8f;
-      height: 4px;
       border-radius: 5px;
       outline: none;
       cursor: pointer;
       transition: background 0.3s;
-      margin-left: 8px;
     }
     .sound-slider:hover {
       background: #174642;
@@ -243,10 +258,20 @@
     }
     /* 점과 연결바가 겹치지 않도록 마진 조정 */
     .music-content-area {
-      margin-top: 90px;
+      margin-top: 30px; /* 기존 90px → 30px으로 위로 */
       margin-bottom: 60px;
       margin-left: 80px;
       margin-right: 80px;
+    }
+    .music-player-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      width: 100%;
+      max-width: 700px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
     }
   </style>
 </head>
@@ -287,20 +312,21 @@
       <div class="blue-dot dot-right-4"></div>
       <!-- 음악 메인 컨텐츠 -->
       <div class="music-content-area">
-         <!-- 둥근 사각형 플레이바 -->
-        <div class="rounded-box" style="margin-bottom:32px;">
-          <div class="highlight" onclick="location.href='music_detail.html'"></div>
-          <div class="remaining"></div>
-        </div>
-        <!-- 플레이어 컨트롤 -->
-        <div class="controls">
-          <button class="control-button">⇄</button>
-          <button class="control-button">⯬</button>
-          <button class="control-button">▶</button>
-          <button class="control-button">⯮</button>
-          <button class="control-button">⟲</button>
-          <div class="sound-bar">
-            🔊 <input type="range" min="0" max="100" value="30" class="sound-slider">
+        <div class="music-player-row">
+          <div class="controls">
+            <button class="control-button">⇄</button>
+            <button class="control-button">⯬</button>
+            <button class="control-button">▶</button>
+            <button class="control-button">⯮</button>
+            <button class="control-button">⟲</button>
+            
+            <div class="sound-bar">
+              🔊 <input type="range" min="0" max="100" value="30" class="sound-slider">
+            </div>
+          </div>
+          <div class="rounded-box">
+            <div class="highlight" onclick="location.href='music_detail.html'"></div>
+            <div class="remaining"></div>
           </div>
         </div>
 
@@ -356,9 +382,9 @@
       <a href="game.html" class="side-tab" title="게임">🎮</a>
       <button class="side-tab" title="메세지">💬</button>
       <button class="side-tab" title="설정">&#9881;</button>
-      <button class="side-tab" title="정보">&#8505;</button>
+      <!-- <button class="side-tab" title="정보">&#8505;</button> -->
       <a href="로그인.html" class="side-tab" title="로그아웃">&#10162;</a>
-      <button class="side-tab" title="목록">&#9776;</button>
+      <!-- <button class="side-tab" title="목록">&#9776;</button> -->
     </div>
   </div>
   <script>

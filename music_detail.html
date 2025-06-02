@@ -3,106 +3,460 @@
 <head>
   <meta charset="UTF-8">
   <title>노래 상세</title>
+  <link rel="stylesheet" href="common.css">
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #111;
-      color: white;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #c8ded9;
+      color: #174642;
+      min-height: 100vh;
+      width: 100vw;
+      box-sizing: border-box;
       display: flex;
-      flex-direction: column;
-      height: 100vh;
-    }
-
-    .container {
-      display: flex;
-      flex: 1;
-      padding: 20px;
-      gap: 20px;
-    }
-
-    .album-cover {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
+      justify-content: center;
       align-items: center;
     }
 
-    .album-cover img {
-      width: 100%;
-      max-width: 300px;
-      border-radius: 10px;
+    .container {
+      background: #ecf4f3;
+      border-radius: 18px;
+      box-shadow: 0 4px 24px 0 rgba(110,156,143,0.13);
+      display: flex;
+      flex-direction: row;
+      gap: 40px;
+      padding: 48px 48px 40px 48px;
+      max-width: 900px;
+      width: 90vw;
+      min-height: 540px;
+      align-items: flex-start;
+    }
+
+    .album-cover {
+      flex: 1 1 320px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 260px;
+      max-width: 340px;
+      gap: 24px;
+    }
+
+    .album-cover img,
+    .album-img-on-record {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #fff;
+      position: absolute;
+      left: 50%; top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 3;
+      box-shadow: 0 2px 8px #b3b3b3;
+      background: #fff;
+      /* 기존 .album-img-on-record와 동일하게 적용 */
     }
 
     .play-bar {
       width: 100%;
-      margin-top: 20px;
+      margin-top: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
     .play-bar input[type="range"] {
       width: 100%;
       -webkit-appearance: none;
-      background: #444;
-      height: 5px;
+      appearance: none;
+      background: #6e9c8f;
+      height: 6px;
       border-radius: 5px;
       outline: none;
       cursor: pointer;
+      margin: 0 8px;
+      transition: background 0.3s;
+    }
+
+    .play-bar input[type="range"]:hover {
+      background: #174642;
     }
 
     .play-bar input[type="range"]::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
-      width: 15px;
-      height: 15px;
-      background: yellow;
+      width: 18px;
+      height: 18px;
+      background: #174642;
       border-radius: 50%;
+      border: 2px solid #ecf4f3;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .play-bar input[type="range"]::-webkit-slider-thumb:hover {
+      background: #6e9c8f;
+    }
+
+    /* Firefox */
+    .play-bar input[type="range"]::-moz-range-thumb {
+      width: 18px;
+      height: 18px;
+      background: #174642;
+      border-radius: 50%;
+      border: 2px solid #ecf4f3;
       cursor: pointer;
     }
 
+    .play-bar input[type="range"]:focus {
+      outline: none;
+    }
+
+    .album-title {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #174642;
+      margin-top: 10px;
+      margin-bottom: 2px;
+      text-align: center;
+    }
+
+    .album-artist {
+      font-size: 1.05rem;
+      color: #6e9c8f;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
     .lyrics-playlist {
-      flex: 1;
+      flex: 2 1 340px;
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 24px;
+      min-width: 260px;
     }
 
-    .lyrics {
-      flex: 1;
-      background-color: #222;
-      padding: 20px;
-      border-radius: 10px;
+    .lyrics, .playlist {
+      background: rgba(255,255,255,0.7);
+      border-radius: 0 0 14px 14px;
+      box-shadow: 0 2px 8px #b3b3b3;
+      padding: 22px 20px 18px 20px;
+      min-height: 120px;
+      color: #174642;
+      font-size: 1.05rem;
       overflow-y: auto;
+      display: none;
+      margin-top: 0;
     }
 
-    .playlist {
-      flex: 1;
-      background-color: #222;
-      padding: 20px;
-      border-radius: 10px;
-      overflow-y: auto;
+    .lyrics.active, .playlist.active {
+      display: block;
     }
 
     .lyrics h3, .playlist h3 {
-      margin: 0 0 10px;
+      margin: 0 0 12px 0;
+      font-size: 1.15rem;
+      color: #174642;
+      font-weight: bold;
+      letter-spacing: -1px;
     }
+
+    .playlist ul {
+      padding-left: 18px;
+      margin: 0;
+      color: #174642;
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .playlist ul li {
+      margin-bottom: 4px;
+      border-radius: 7px;
+      padding: 4px 10px;
+      transition: background 0.18s;
+      cursor: pointer;
+    }
+
+    .playlist ul li:hover {
+      background: #c8ded9;
+    }
+
+    .close-btn {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      z-index: 1000;
+      background: none;
+      color: #174642;
+      border: none;
+      border-radius: 0;
+      font-size: 2.5rem;
+      font-weight: bold;
+      display: block;
+      width: auto;
+      height: auto;
+      padding: 0;
+      line-height: 1;
+      cursor: pointer;
+      box-shadow: none;
+      transition: color 0.18s;
+      text-decoration: none;
+    }
+
+    .close-btn:hover {
+      color: #6e9c8f;
+      background: none;
+      border: none;
+    }
+
+    /* 레코드판 스타일 추가 */
+    .record-wrapper {
+      position: relative;
+      width: 280px;
+      height: 280px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+    }
+    .turntable-base {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 320px;
+      height: 320px;
+      background: #b3b3b3; /* 회색 사각형 */
+      border-radius: 18px;
+      transform: translate(-50%, -50%);
+      z-index: 0;
+      box-shadow: 0 8px 32px 0 rgba(110,156,143,0.10);
+    }
+    .counterweight {
+      position: absolute;
+      width: 32px;
+      height: 32px;
+      background: #888;
+      border-radius: 50%;
+      right: 18px; /* 오른쪽으로 이동 */
+      top: 18px;
+      z-index: 12;
+      box-shadow: 0 2px 6px #b3b3b3;
+      border: 4px solid #e0e0e0;
+    }
+    .turntable-arm {
+      position: absolute;
+      height: 10px;
+      background: #888;
+      border-radius: 5px;
+      right: 34px; /* 오른쪽으로 이동 */
+      top: 34px;
+      width: 100px;
+      transform: rotate(-28deg); /* 각도 반대로 */
+      z-index: 11;
+      box-shadow: 0 1px 4px #b3b3b3;
+      transform-origin: right center;
+    }
+    
+    .record {
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 70% 30%, #222 60%, #444 100%);
+      box-shadow: 0 4px 24px 0 rgba(110,156,143,0.13);
+      border: 6px solid #c8ded9;
+      position: absolute;
+      left: 50%; top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .record-center {
+      width: 60px;
+      height: 60px;
+      background: #6e9c8f;
+      border-radius: 50%;
+      border: 4px solid #ecf4f3;
+      position: absolute;
+      left: 50%; top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      box-shadow: 0 1px 6px #b3b3b3;
+    }
+
+    @media (max-width: 900px) {
+      .container {
+        flex-direction: column;
+        align-items: center;
+        padding: 24px 8vw 24px 8vw;
+        gap: 24px;
+      }
+
+      .album-cover, .lyrics-playlist {
+        min-width: 0;
+        max-width: 100%;
+        width: 100%;
+      }
+    }
+    /* 토글 버튼 영역 */
+    .toggle-btn-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 18px;
+      justify-content: flex-end;
+    }
+    .toggle-btn {
+      border: none;
+      background: #c8ded9;
+      color: #174642;
+      font-size: 1.08rem;
+      font-weight: 600;
+      border-radius: 8px 8px 0 0;
+      padding: 8px 28px;
+      cursor: pointer;
+      transition: background 0.18s, color 0.18s;
+      outline: none;
+      box-shadow: 0 1px 4px #b3b3b3;
+    }
+    .toggle-btn.active, .toggle-btn:hover {
+      background: #6e9c8f;
+      color: #fff;
+    }
+    .music-controls-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 12px;
+      margin-bottom: 0;
+      background: #ecf4f3;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px 0 rgba(110, 156, 143, 0.08);
+      padding: 8px 18px;
+      width: fit-content;
+      min-width: 180px;
+      max-width: 320px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .music-control-button {
+      background-color: #c8ded9;
+      color: #174642;
+      border: none;
+      font-size: 18px;
+      border-radius: 7px;
+      cursor: pointer;
+      transition: color 0.3s, background 0.2s, transform 0.2s;
+      margin: 0 2px;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 1px 4px #b3b3b3;
+    }
+    .music-control-button:hover {
+      background: #6e9c8f;
+      color: #fff;
+      transform: scale(1.13);
+    }
+    .music-control-button:active {
+      background: #174642;
+      color: #fff;
+      transform: scale(1.07);
+    }
+    .music-sound-bar {
+      display: flex;
+      align-items: center;
+      width: 90px;
+      margin-left: 8px;
+      color: #174642;
+      font-size: 15px;
+      background: #c8ded9;
+      border-radius: 8px;
+      padding: 2px 6px;
+      box-shadow: 0 1px 4px #b3b3b3;
+    }
+    .music-sound-slider {
+      width: 40px;
+      height: 3px;
+      margin-left: 5px;
+      -webkit-appearance: none;
+      appearance: none;
+      background: #6e9c8f;
+      border-radius: 5px;
+      outline: none;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .music-sound-slider:hover {
+      background: #174642;
+    }
+    .music-sound-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 14px;
+      height: 14px;
+      background: #174642;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background 0.3s;
+      border: 2px solid #ecf4f3;
+    }
+    .music-sound-slider::-webkit-slider-thumb:hover {
+      background: #6e9c8f;
+    }
+    /* ...existing code... */
   </style>
 </head>
 <body>
+  <a href="music.html" class="close-btn" title="음악 목록으로 돌아가기">×</a>
   <div class="container">
     <!-- 노래 사진 -->
     <div class="album-cover">
-      <img src="https://via.placeholder.com/300" alt="앨범 이미지">
+      <div class="record-wrapper">
+        <div class="turntable-base"></div>
+        <div class="counterweight"></div>
+        <div class="turntable-arm"></div>
+        <div class="turntable-arm-head"></div>
+        <div class="record"></div>
+        <img src="https://via.placeholder.com/300" alt="앨범 이미지" class="album-img-on-record">
+        <!-- <div class="record-center"></div> -->
+      </div>
+      <div class="album-title">앨범 제목</div>
+      <div class="album-artist">아티스트 이름</div>
       <div class="play-bar">
         <input type="range" min="0" max="100" value="30">
       </div>
-    </div>
-
-    <!-- 가사와 플레이리스트 -->
-    <div class="lyrics-playlist">
-      <div class="lyrics">
-        <h3>가사</h3>
+      <div class="music-controls-row">
+        <button class="music-control-button">⇄</button>
+        <button class="music-control-button">⯬</button>
+        <button class="music-control-button">▶</button>
+        <button class="music-control-button">⯮</button>
+        <button class="music-control-button">⟲</button>
+        <div class="music-sound-bar">
+          🔊 <input type="range" min="0" max="100" value="30" class="music-sound-slider">
+        </div>
       </div>
-      <div class="playlist">
+    </div>
+    <!-- 가사/재생목록 토글 -->
+    <div class="lyrics-playlist">
+      <div class="toggle-btn-row">
+        <button class="toggle-btn active" id="btn-lyrics" type="button">가사</button>
+        <button class="toggle-btn" id="btn-playlist" type="button">재생 목록</button>
+      </div>
+      <div class="lyrics active" id="lyrics-panel">
+        <h3>가사</h3>
+        <div>
+          오늘은 정말 즐거운 하루였다.<br>
+          친구들과 함께 카페에 가서 맛있는 디저트를 먹고, 산책도 했다.<br>
+          내일도 좋은 하루가 되길!
+        </div>
+      </div>
+      <div class="playlist" id="playlist-panel">
         <h3>플레이리스트</h3>
         <ul>
           <li>노래 1</li>
@@ -113,5 +467,24 @@
       </div>
     </div>
   </div>
+  <script>
+    // 가사/재생목록 토글
+    const btnLyrics = document.getElementById('btn-lyrics');
+    const btnPlaylist = document.getElementById('btn-playlist');
+    const lyricsPanel = document.getElementById('lyrics-panel');
+    const playlistPanel = document.getElementById('playlist-panel');
+    btnLyrics.onclick = function() {
+      btnLyrics.classList.add('active');
+      btnPlaylist.classList.remove('active');
+      lyricsPanel.classList.add('active');
+      playlistPanel.classList.remove('active');
+    };
+    btnPlaylist.onclick = function() {
+      btnPlaylist.classList.add('active');
+      btnLyrics.classList.remove('active');
+      playlistPanel.classList.add('active');
+      lyricsPanel.classList.remove('active');
+    };
+  </script>
 </body>
 </html>
