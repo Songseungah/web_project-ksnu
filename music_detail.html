@@ -40,6 +40,7 @@
       min-width: 260px;
       max-width: 340px;
       gap: 24px;
+      margin-top: 40px;
     }
 
     .album-cover img,
@@ -148,6 +149,10 @@
       overflow-y: auto;
       display: none;
       margin-top: 0;
+    }
+    .lyrics {
+      max-height: 450px;
+      overflow-y: auto;
     }
 
     .lyrics.active, .playlist.active {
@@ -273,18 +278,30 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
+      /* 회전 애니메이션 클래스용 */
     }
-    .record-center {
-      width: 60px;
-      height: 60px;
-      background: #6e9c8f;
+    .album-img-on-record {
+      width: 110px;
+      height: 110px;
       border-radius: 50%;
-      border: 4px solid #ecf4f3;
+      object-fit: cover;
+      border: 4px solid #fff;
       position: absolute;
       left: 50%; top: 50%;
       transform: translate(-50%, -50%);
-      z-index: 2;
-      box-shadow: 0 1px 6px #b3b3b3;
+      z-index: 3;
+      box-shadow: 0 2px 8px #b3b3b3;
+      background: #fff;
+    }
+    .record.spin,
+    .album-img-on-record.spin {
+      animation: record-spin 2.5s linear infinite;
+    }
+    @keyframes record-spin {
+      100% {
+        /* translate는 그대로 두고 rotate만 추가 */
+        transform: translate(-50%, -50%) rotate(360deg);
+      }
     }
 
     @media (max-width: 900px) {
@@ -423,7 +440,7 @@
         <div class="turntable-arm"></div>
         <div class="turntable-arm-head"></div>
         <div class="record"></div>
-        <img src="https://via.placeholder.com/300" alt="앨범 이미지" class="album-img-on-record">
+        <img src="https://image.bugsm.co.kr/album/images/500/2014/201402.jpg" alt="앨범 이미지" class="album-img-on-record">
         <!-- <div class="record-center"></div> -->
       </div>
       <div class="album-title">앨범 제목</div>
@@ -451,18 +468,71 @@
       <div class="lyrics active" id="lyrics-panel">
         <h3>가사</h3>
         <div>
-          오늘은 정말 즐거운 하루였다.<br>
-          친구들과 함께 카페에 가서 맛있는 디저트를 먹고, 산책도 했다.<br>
-          내일도 좋은 하루가 되길!
+          Yeah, whoa 너 아까 나한테 왜 그랬어 uh, huh<br>
+          너 또 왜 그러는데 (yeah, yeah)<br>
+          내가 도대체 어디까지 맞춰야 돼<br>
+          넌 맨날 그런 식이야 됐어 나 갈게<br>
+          Uh 너는 뛰쳐나가 차 문을 부술 듯이 닫으면서<br>
+          난 머리를 처박고 한숨 쉬어 핸들을 안으면서<br>
+          이런 광경이 너무 익숙해 이젠<br>
+          웬만한 싸움에는 상처도 잘 안 나 이젠<br>
+          명품 쇼핑할 때처럼 너무 깐깐해 네 기준은<br>
+          한번 화내면 뒤끝 장난 아냐 적어도 2주는 가니까<br>
+          난 성격이 너무 물러서<br>
+          넌 항상 말해 남자니까 뒤로 좀 물러서<br>
+          부담돼 네가 내게 결혼을 보채는 것도<br>
+          난 달인처럼 대화 화제를 돌리는 법도 많이 늘었어<br>
+          넌 항상 추격하고 나는 도망쳐<br>
+          솔직히 말할게 난 아직 준비 안 됐어<br>
+          지쳤어 조금 널 향한 사랑은 도금이<br>
+          벗겨진 반지처럼 빛이 바랬어<br>
+          오늘은 이별을 말해야 될 것 같아<br>
+          지겹거든 너랑 다툴 때마다 항상 하는 말<br>
+          내가 죽일 놈이지 뭐 우리가 어긋날 때면<br>
+          전부 내 탓이지 뭐 마치 죄인인 것처럼<br>
+          난 한걸음 물러서서 아무 말도 안 해<br>
+          완벽한 너한테 난 항상 부족한 사람인걸<br>
+          처음에 쉬웠어 너와 함께라는 게<br>
+          난 너를 위해 내 자신을 숨기고 또 지웠어<br>
+          사랑에 취해 네게 기대고<br>
+          너란 퍼즐에 날 억지로 맞춰 끼웠어<br>
+          하지만 이젠 나 지쳤어<br>
+          네가 만든 내게 난 숨이 막혀 오는데<br>
+          넌 점점 더 내게 바라는 게 많아졌어<br>
+          마찰이 잦아졌어 네가 사 준 구두 굽처럼 사랑이 닳아졌어<br>
+          네 잔소리는 넥타이처럼<br>
+          내 목을 조여서 날 얌전하게 만들었지<br>
+          그래서 그게 좋아 보였어<br>
+          그때 내 속은 한참 뒤틀리고 꼬였어<br>
+          지금 난 널 만나기 전에 내가 너무 고파<br>
+          이미 우리 사이 권태라는 벽은 너무 높아<br>
+          내가 더 잘할게 잘할게 하며 발악했던 나지만<br>
+          오늘은 말할래 이것이 너와 나의 마지막 (이란걸 girl)<br>
+          내가 죽일 놈이지 뭐 우리가 어긋날 때면<br>
+          전부 내 탓이지 뭐 마치 죄인인 것처럼<br>
+          난 한걸음 물러서서 아무 말도 안 해<br>
+          완벽한 너한테 나 항상 부족한 사람인걸<br>
+          내가 잘할게<br>
+          내가 잘할게란 말 이제 두 번 다시 안 할게<br>
+          이 말 안 할래<br>
+          너를 사랑해란 말 이제 두 번 다시 안 할게<br>
+          내가 잘할게<br>
+          내게 잘해 달란 말 이제 두 번 다시 안 할게<br>
+          이 말 안 할래<br>
+          그동안 참아왔던 이별을 오늘은 네게 말할래 (I don't wanna say no more)<br>
+          내가 죽일 놈이지 뭐 우리가 어긋날 때면<br>
+          전부 내 탓이지 뭐 마치 죄인인 것처럼<br>
+          난 한걸음 물러서서 아무 말도 안 해 (한 걸음)<br>
+          완벽한 너한테 나 항상 부족한 사람인걸
         </div>
       </div>
       <div class="playlist" id="playlist-panel">
         <h3>플레이리스트</h3>
         <ul>
-          <li>노래 1</li>
-          <li>노래 2</li>
-          <li>노래 3</li>
-          <li>노래 4</li>
+          <li>죽일 놈 - 다이나믹 듀오오</li>
+          <li>안녕 - 디아</li>
+          <li>바람이나 좀 쐐 - 개리</li>
+          <li>Die With a Smile - Lady Gaga</li>
         </ul>
       </div>
     </div>
@@ -485,6 +555,24 @@
       playlistPanel.classList.add('active');
       lyricsPanel.classList.remove('active');
     };
+
+    // 레코드판 회전 제어
+    const playBtn = document.querySelectorAll('.music-control-button')[2]; // ▶ 버튼
+    const record = document.querySelector('.record');
+    const albumImg = document.querySelector('.album-img-on-record');
+    let spinning = false;
+    playBtn.addEventListener('click', function() {
+      spinning = !spinning;
+      if (spinning) {
+        record.classList.add('spin');
+        albumImg.classList.add('spin');
+        playBtn.textContent = '⏸'; // 일시정지 아이콘으로 변경
+      } else {
+        record.classList.remove('spin');
+        albumImg.classList.remove('spin');
+        playBtn.textContent = '▶'; // 재생 아이콘으로 복원
+      }
+    });
   </script>
 </body>
 </html>

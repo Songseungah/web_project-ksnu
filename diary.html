@@ -165,7 +165,7 @@
     .add-diary-btn {
       position: absolute;
       top: 32px;
-      right: 48px;
+      right: 20px;
       z-index: 10;
       background: #6e9c8f;
       color: #fff;
@@ -236,7 +236,14 @@
       <!-- 오른쪽 내용 영역 (비워둠) -->
       <div class="calendar-area">
         <div class="calendar-sheet">
-          <div class="calendar-month">05</div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+            <button id="prev-month-btn" style="background:none;border:none;font-size:2rem;cursor:pointer;color:#6e9c8f;">&#8592;</button>
+            <div>
+              <span id="calendar-year" style="font-size:28px;font-weight:bold;color:#174642;margin-right:12px;">2025</span>
+              <span class="calendar-month" id="calendar-month">05</span>
+            </div>
+            <button id="next-month-btn" style="background:none;border:none;font-size:2rem;cursor:pointer;color:#6e9c8f;">&#8594;</button>
+          </div>
           <table class="calendar-table">
             <thead>
               <tr>
@@ -249,61 +256,8 @@
                 <th class="sun">SUN</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td class="empty"></td>
-                <td class="empty"></td>
-                <td class="empty"></td>
-                <td class="empty"></td>
-                <td class="empty"></td>
-                <td class="sat"><a href="diary_detail.html" style="color:inherit;text-decoration:none;">1</a></td>
-                <td class="sun"><a href="diary_detail.html" style="color:inherit;text-decoration:none;">2</a></td>
-              </tr>
-              <tr>
-                <td><a href="diary_detail.html" style="color:inherit;text-decoration:none;">3</a></td>
-                <td><a href="diary_detail.html" style="color:inherit;text-decoration:none;">4</a></td>
-                <td><a href="diary_detail.html" style="color:inherit;text-decoration:none;">5</a></td>
-                <td><a href="diary_detail.html" style="color:inherit;text-decoration:none;">6</a></td>
-                <td><a href="diary_detail.html" style="color:inherit;text-decoration:none;">7</a></td>
-                <td class="sat"><a href="diary_detail.html" style="color:inherit;text-decoration:none;">8</a></td>
-                <td class="sun"><a href="diary_detail.html" style="color:inherit;text-decoration:none;">9</a></td>
-              </tr>
-              <tr>
-                <td><a href="diary_detail.html" style="color:inherit;text-decoration:none;">10</a></td>
-                <td><a href="diary_detail.html" style="color:inherit;text-decoration:none;">11</a></td>
-                <td><a href="diary_detail.html" style="color:inherit;text-decoration:none;">12</a></td>
-                <td><a href="diary_detail.html" style="color:inherit;text-decoration:none;">13</a></td>
-                <td><a href="diary_detail.html" style="color:inherit;text-decoration:none;">14</a></td>
-                <td class="sat"><a href="diary_detail.html" style="color:inherit;text-decoration:none;">15</a></td>
-                <td class="sun"><a href="diary_detail.html" style="color:inherit;text-decoration:none;">16</a></td>
-              </tr>
-              <tr>
-                <td><a href="diary_detail.html" style="color:inherit;text-decoration:none;">17</a></td>
-                <td><a href="diary_detail.html" style="color:inherit;text-decoration:none;">18</a></td>
-                <td><a href="diary_detail.html" style="color:inherit;text-decoration:none;">19</a></td>
-                <td><a href="diary_detail.html" style="color:inherit;text-decoration:none;">20</a></td>
-                <td><a href="diary_detail.html" style="color:inherit;text-decoration:none;">21</a></td>
-                <td class="sat"><a href="diary_detail.html" style="color:inherit;text-decoration:none;">22</a></td>
-                <td class="sun"><a href="diary_detail.html" style="color:inherit;text-decoration:none;">23</a></td>
-              </tr>
-              <tr>
-                <td><a href="diary_detail.html" style="color:inherit;text-decoration:none;">24</a></td>
-                <td><a href="diary_detail.html" style="color:inherit;text-decoration:none;">25</a></td>
-                <td><a href="diary_detail.html" style="color:inherit;text-decoration:none;">26</a></td>
-                <td><a href="diary_detail.html" style="color:inherit;text-decoration:none;">27</a></td>
-                <td><a href="diary_detail.html" style="color:inherit;text-decoration:none;">28</a></td>
-                <td class="sat"><a href="diary_detail.html" style="color:inherit;text-decoration:none;">29</a></td>
-                <td class="sun"><a href="diary_detail.html" style="color:inherit;text-decoration:none;">30</a></td>
-              </tr>
-              <tr>
-                <td><a href="diary_detail.html" style="color:inherit;text-decoration:none;">31</a></td>
-                <td class="empty"></td>
-                <td class="empty"></td>
-                <td class="empty"></td>
-                <td class="empty"></td>
-                <td class="empty"></td>
-                <td class="empty"></td>
-              </tr>
+            <tbody id="calendar-body">
+              <!-- JS로 동적 생성 -->
             </tbody>
           </table>
         </div>
@@ -322,5 +276,88 @@
       <!-- <button class="side-tab" title="목록">&#9776;</button> -->
     </div>
   </div>
+  <script>
+// 6월(5, JS는 0부터 시작)만 일기/할일 표시, 나머지 달은 비움
+function renderCalendar(year, month) {
+  currentYear = year;
+  currentMonth = month;
+  const tbody = document.getElementById('calendar-body');
+  const monthTitle = document.getElementById('calendar-month');
+  const yearTitle = document.getElementById('calendar-year');
+  tbody.innerHTML = '';
+
+  // 년도 표기
+  yearTitle.textContent = year;
+
+  // 월 표기 (01, 02 ...)
+  monthTitle.textContent = String(month + 1).padStart(2, '0');
+
+  // 1일의 요일 (0:일~6:토, 월요일 시작이므로 1:월~0:일)
+  const firstDate = new Date(year, month, 1);
+  let startDay = firstDate.getDay(); // 0(일)~6(토)
+  startDay = startDay === 0 ? 6 : startDay - 1; // 월요일 시작
+
+  const lastDate = new Date(year, month + 1, 0).getDate();
+  let html = '';
+  let day = 1;
+
+  // 6월(5)만 데이터, 나머지는 빈칸
+  let diaryDays = [];
+  let todoDays = [];
+  if (month === 5) {
+    diaryDays = [2, 5, 12, 18];
+    todoDays = [3, 5, 12, 20];
+  }
+
+  for (let i = 0; i < 6; i++) { // 최대 6주
+    html += '<tr>';
+    for (let j = 0; j < 7; j++) {
+      if ((i === 0 && j < startDay) || day > lastDate) {
+        html += '<td class="empty"></td>';
+      } else {
+        let cellClass = '';
+        if (j === 5) cellClass = 'sat';
+        if (j === 6) cellClass = 'sun';
+        html += `<td${cellClass ? ` class="${cellClass}"` : ''}>`;
+
+        // 6월만 일기/할일 표시
+        if (month === 5) {
+          if (diaryDays.includes(day)) {
+            html += `<span style="font-size:15px;color:#267e4c;margin-right:4px;">✔️</span>`;
+          }
+          html += `<a href="diary_detail.html" style="color:inherit;text-decoration:none;">${day}</a>`;
+          if (todoDays.includes(day)) {
+            html += `<div style="font-size:12px;color:#6e9c8f;margin-top:2px;">할 일</div>`;
+          }
+        } else {
+          html += `${day}`;
+        }
+        html += '</td>';
+        day++;
+      }
+    }
+    html += '</tr>';
+    if (day > lastDate) break;
+  }
+  tbody.innerHTML = html;
+}
+
+// 오늘 날짜 기준으로 렌더링
+document.addEventListener('DOMContentLoaded', function() {
+  const today = new Date();
+  renderCalendar(today.getFullYear(), today.getMonth());
+
+  document.getElementById('prev-month-btn').onclick = function() {
+    let y = currentYear, m = currentMonth - 1;
+    if (m < 0) { m = 11; y--; }
+    renderCalendar(y, m);
+  };
+  document.getElementById('next-month-btn').onclick = function() {
+    let y = currentYear, m = currentMonth + 1;
+    if (m > 11) { m = 0; y++; }
+    renderCalendar(y, m);
+  };
+});
+</script>
 </body>
 </html>

@@ -26,11 +26,28 @@
     }
     .albums {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      grid-template-columns: repeat(4, 1fr);
       gap: 24px;
       width: 100%;
-      max-width: 800px;
+      max-width: 1000px;
       margin-bottom: 40px;
+      max-height: 490px;
+      overflow-y: auto;
+      /* 스크롤바 디자인 */
+      scrollbar-width: thin;
+      scrollbar-color: #6e9c8f #ecf4f3;
+    }
+    .albums::-webkit-scrollbar {
+      width: 8px;
+      background: #ecf4f3;
+      border-radius: 8px;
+    }
+    .albums::-webkit-scrollbar-thumb {
+      background: #6e9c8f;
+      border-radius: 8px;
+    }
+    .albums::-webkit-scrollbar-thumb:hover {
+      background: #174642;
     }
     .album-card {
       background: #ecf4f3;
@@ -85,6 +102,7 @@
       margin: 0 auto 24px auto; /* 기존 32px → 24px으로 위로 */
       box-shadow: 0 4px 18px 0 rgba(110, 156, 143, 0.10), 0 1.5px 0 #c8ded9;
       border: 2px solid #c8ded9;
+      align-items: center;
     }
     .rounded-box .highlight {
       flex: 1;
@@ -94,6 +112,32 @@
       position: relative;
       cursor: pointer;
       transition: background 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      min-width: 38px;
+      width: 38px;
+      padding: 0;
+      overflow: hidden;
+      border-right: 1.5px solid #c8ded9;
+    }
+    .rounded-box .highlight img {
+      width: 36px;
+      height: 36px;
+      object-fit: cover;
+      border-radius: 6px;
+      display: block;
+    }
+    .player-info {
+      display: flex !important;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding-left: 0 !important;
+      width: 100%;
+      height: 100%;
+      text-align: center;
     }
     .rounded-box:hover .highlight::after {
       content: '↸';
@@ -273,6 +317,89 @@
       margin-bottom: 20px;
       flex-wrap: wrap;
     }
+    .home-hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      /* 기존 빨간색 → 사이트 배경색 계열로 변경 */
+      background: linear-gradient(120deg, #ecf4f3 60%, #c8ded9 100%);
+      border-radius: 24px;
+      box-shadow: 0 8px 32px 0 rgba(110,156,143,0.10);
+      padding: 32px 20px 28px 20px; /* 기존 60px 30px 48px 30px → 높이 줄임 */
+      margin: 0 auto 32px auto;
+      max-width: 700px;
+      /* min-height: 420px; */
+      max-height: 490px;
+      color: #174642;
+      position: relative;
+    }
+    .home-hero .music-icon {
+      font-size: 110px;
+      margin-bottom: 32px;
+      color: #6e9c8f;
+      filter: drop-shadow(0 6px 24px rgba(110,156,143,0.10));
+      text-shadow: 0 2px 12px #b3b3b333;
+    }
+    .home-hero .main-title {
+      font-size: 2.2rem;
+      font-weight: bold;
+      margin-bottom: 18px;
+      letter-spacing: -1.5px;
+      text-align: center;
+      color: #174642;
+    }
+    .home-hero .main-desc {
+      font-size: 1.1rem;
+      margin-bottom: 32px;
+      text-align: center;
+      color: #174642;
+      opacity: 0.95;
+    }
+    .home-hero .main-btn {
+      background: #6e9c8f;
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 38px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px #b3b3b3;
+      transition: background 0.18s, color 0.18s;
+    }
+    .home-hero .main-btn:hover {
+      background: #174642;
+      color: #fff;
+    }
+    .home-hero .sub-link {
+      color: #6e9c8f;
+      text-decoration: underline;
+      font-size: 0.98rem;
+      opacity: 0.85;
+      margin-top: 8px;
+      cursor: pointer;
+    }
+    /* 기존 스타일과의 간격 조정 */
+    section {
+      padding: 0 16px;
+      margin: 0 auto;
+      width: 100%;
+      max-width: 1000px;
+    }
+    .album-title {
+      font-size: 15px;
+      font-weight: bold;
+      color: #174642;
+      margin-bottom: 2px;
+      text-align: center;
+    }
+    .album-artist {
+      font-size: 13px;
+      color: #6e9c8f;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -325,38 +452,98 @@
             </div>
           </div>
           <div class="rounded-box">
-            <div class="highlight" onclick="location.href='music_detail.html'"></div>
+            <div class="highlight" id="player-highlight" onclick="location.href='music_detail.html'"></div>
+            <div class="player-info" id="player-info" style="display:none; flex-direction:column; justify-content:center; padding-left:12px;">
+              <span id="player-title" class="album-title" style="font-size:15px; font-weight:bold; color:#174642;"></span>
+              <span id="player-artist" class="album-artist" style="font-size:13px; color:#6e9c8f;"></span>
+            </div>
             <div class="remaining"></div>
           </div>
         </div>
 
         <!-- 섹션별 컨텐츠 -->
         <section id="home">
-          <div class="music-title">홈</div>
-          <p style="color:#174642; font-size:1.1rem;">환영합니다! 여기에 홈 콘텐츠를 추가하세요.</p>
+          <div class="home-hero">
+            <div class="music-icon">
+              <!-- 유니코드 음표 아이콘 -->
+              &#127925;
+            </div>
+            <div class="main-title">
+              매일 새로운 음악을<br>발견해 보세요.
+            </div>
+            <div class="main-desc">
+              감상 중인 아티스트와 장르를 기준으로 엄선된 플레이리스트 및 앨범이 제공됩니다.
+            </div>
+            <button class="main-btn" onclick="showSection('music')">시작하기</button>
+            <div class="sub-link" onclick="alert('학생 요금제는 준비 중입니다.')">학생 요금제 보기 &gt;</div>
+          </div>
         </section>
         <section id="music" style="display:none;">
           <div class="music-title">새로운 음악</div>
           <div class="albums">
             <div class="album-card">
-              <img src="https://via.placeholder.com/200" alt="앨범 이미지">
-              <h3>앨범 제목 1</h3>
-              <p>아티스트 1</p>
+              <img src="https://image.bugsm.co.kr/album/images/500/2014/201402.jpg" alt="앨범 이미지">
+              <h3>죽일 놈</h3>
+              <p>다이나믹 듀오</p>
             </div>
             <div class="album-card">
-              <img src="https://via.placeholder.com/200" alt="앨범 이미지">
-              <h3>앨범 제목 2</h3>
-              <p>아티스트 2</p>
+              <img src="https://image.genie.co.kr/Y/IMAGE/IMG_ALBUM/080/953/680/80953680_1497340586995_1_600x600.JPG" alt="앨범 이미지">
+              <h3>안녕</h3>
+              <p>디아 </p>
             </div>
             <div class="album-card">
-              <img src="https://via.placeholder.com/200" alt="앨범 이미지">
-              <h3>앨범 제목 3</h3>
-              <p>아티스트 3</p>
+              <img src="https://image.bugsm.co.kr/album/images/500/5331/533131.jpg" alt="앨범 이미지">
+              <h3>바람이나 좀 쐐</h3>
+              <p>개리</p>
             </div>
             <div class="album-card">
-              <img src="https://via.placeholder.com/200" alt="앨범 이미지">
-              <h3>앨범 제목 4</h3>
-              <p>아티스트 4</p>
+              <img src="https://i.namu.wiki/i/3ZTcQkfpJcL5pRfYxIfKEaP2U2sw57Zmd26fi8pESMJfSuZ3AVPIybmvt3ilVq9pMnKfEZW3PGKQ3lC-D1-pRg.webp" alt="앨범 이미지">
+              <h3>Die With a Smile</h3>
+              <p>Lady Gaga</p>
+              
+            </div>
+            <!-- 두 번째 줄 앨범 4개 추가 -->
+            <div class="album-card">
+              <img src="https://image.bugsm.co.kr/album/images/500/200519/20051981.jpg" alt="앨범 이미지">
+              <h3>그대라는 사치</h3>
+              <p>임창정</p>
+            </div>
+            <div class="album-card">
+              <img src="https://i.namu.wiki/i/t2XMGWvr977QIIuHG8HLv0QGYrLn83FBY7f2P6XIVstfFfO6ZXOQi-K1srSHKKX6S4vMXmlwheWvnheNP8fyLA.webp" alt="앨범 이미지">
+              <h3>벚꽃 엔딩</h3>
+              <p>버스커 버스커</p>
+            </div>
+            <div class="album-card">
+              <img src="https://image.bugsm.co.kr/album/images/500/200324/20032455.jpg" alt="앨범 이미지">
+              <h3>CHEER UP</h3>
+              <p>TWICE</p>
+            </div>
+            <div class="album-card">
+              <img src="https://i.namu.wiki/i/2JYghtDj961GbLtrzxTiFtOwXb6VwkG6VQS_S3VYWr2XFu1NHnOVYufbfmGKFXf5Pgw5N-GquTAHqMeX3Q_gyg.webp" alt="앨범 이미지">
+              <h3>밤편지</h3>
+              <p>아이유</p>
+            </div>
+
+            <!-- 세 번째 줄 앨범 4개 -->
+            <div class="album-card">
+              <img src="https://i.namu.wiki/i/7c--yuxCynWpbHwEbgdUxhlgwkuwQOxQ4pZ57RoBjHls2Fd9tXOwn9ymL1M8SZODNwGkNMEisBrytTTfYyqW0Q.webp" alt="앨범 이미지">
+              <h3>Love Scenario</h3>
+              <p>iKON</p>
+            </div>
+            <div class="album-card">
+              <img src="https://image.bugsm.co.kr/album/images/500/7106/710656.jpg" alt="앨범 이미지">
+              <h3>2002</h3>
+              <p>Anne-Marie</p>
+            </div>
+            <div class="album-card">
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQU6_WLX6m50KECRCQ45xr1QLOE1OQLlBTw_A&s" alt="앨범 이미지">
+              <h3>썸</h3>
+              <p>소유, 정기고</p>
+            </div>
+            <div class="album-card">
+              <img src="https://image.bugsm.co.kr/album/images/500/201679/20167990.jpg" alt="앨범 이미지">
+              <h3>전하지 못한 진심</h3>
+              <p>방탄소년단</p>
             </div>
           </div>
         </section>
@@ -391,6 +578,21 @@
     // 페이지 로드 시 홈 섹션만 표시
     document.addEventListener('DOMContentLoaded', () => {
       showSection('home');
+      // 앨범 클릭 시 플레이어 정보 및 이미지 변경
+      document.querySelectorAll('.album-card').forEach(card => {
+        card.addEventListener('click', function() {
+          const img = card.querySelector('img').src;
+          const title = card.querySelector('h3').innerText;
+          const artist = card.querySelector('p').innerText;
+          // 이미지 넣기
+          let highlight = document.getElementById('player-highlight');
+          highlight.innerHTML = `<img src="${img}" alt="앨범 이미지">`;
+          // 정보 넣기
+          document.getElementById('player-title').innerText = title;
+          document.getElementById('player-artist').innerText = artist;
+          document.getElementById('player-info').style.display = "flex";
+        });
+      });
     });
     function showSection(sectionId) {
       document.querySelectorAll('.music-content-area section').forEach((section) => {
