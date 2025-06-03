@@ -6,26 +6,33 @@
   <style>
     /* 전체 배경 및 레이아웃 설정 */
     body {
-      background-color: #111;
+      background-color: #6e9c8f;
       display: flex;
       justify-content: center;
-      align-items: flex-start; /* 상단 정렬 */
+      align-items: center;
       height: 100vh;
       margin: 0;
+      font-family: Arial, sans-serif;
     }
 
-    /* 게임 선택 메뉴 스타일 */
+    /* 게임 선택 메뉴 스타일 (common.css의 sidebar 참고) */
     .game-selection {
-      position: fixed; /* 고정 위치 */
+      position: fixed;
       top: 0;
-      left: 0; /* 왼쪽으로 붙이기 */
-      width: 200px; /* 너비 */
-      background-color: #333; /* 더 어두운 배경 */
-      color: white;
-      padding: 15px;
+      left: 0;
+      width: 260px;
+      background: #ecf4f3;
+      color: #174642;
+      padding: 40px 0 0 0;
       height: 100%;
       box-sizing: border-box;
-      font-family: Arial, sans-serif; /* 폰트 변경 */
+      font-family: Arial, sans-serif;
+      border-right: 6px solid #174642;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 10;
+      box-shadow: 2px 0 12px rgba(23,70,66,0.07);
     }
 
     /* 게임 선택 메뉴 리스트 스타일 */
@@ -33,32 +40,40 @@
       list-style: none;
       padding: 0;
       margin: 0;
+      width: 80%;
     }
 
     .game-selection li {
-      margin: 15px 0; /* 간격 증가 */
+      margin: 18px 0; /* 간격 증가 */
       cursor: pointer;
-      padding: 10px;
-      background-color: #444; /* 더 어두운 배경 */
+      padding: 14px 0;
+      background: #c8ded9; /* 더 어두운 배경 */
       text-align: center;
-      border-radius: 10px; /* 둥근 모서리 */
-      font-size: 16px; /* 글자 크기 증가 */
-      transition: background-color 0.3s, color 0.3s; /* 부드러운 전환 효과 */
+      border-radius: 12px; /* 둥근 모서리 */
+      font-size: 18px; /* 글자 크기 증가 */
+      font-weight: 500;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s; /* 부드러운 전환 효과 */
+      color: #174642;
+      box-shadow: 0 2px 8px rgba(23,70,66,0.04);
+      border: 2px solid transparent;
     }
 
     /* 메뉴 항목 호버 효과 */
     .game-selection li:hover {
-      background-color: yellow;
-      color: black;
-      transform: scale(1.05); /* 살짝 확대 효과 */
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* 그림자 추가 */
+      background: #6e9c8f;
+      color: #fff;
+      transform: scale(1.04); /* 살짝 확대 효과 */
+      box-shadow: 0 4px 12px rgba(23,70,66,0.10);
+      border: 2px solid #174642;
     }
 
     /* 선택된 메뉴 항목 스타일 */
     .game-selection li.active {
-      background-color: yellow; /* 선택된 상태 */
-      color: black;
+      background: #174642; /* 선택된 상태 */
+      color: #fff;
       font-weight: bold;
+      border: 2px solid #6e9c8f;
+      box-shadow: 0 4px 16px rgba(23,70,66,0.13);
     }
 
     /* 아케이드 머신 상단 파란색 직사각형 */
@@ -101,19 +116,26 @@
       height: 270px; /* 스크린 크기 */
     }
 
-    /* 코인 버튼 스타일 */
+    /* 코인 버튼 스타일 (common.css 버튼 참고) */
     .coin-button {
       position: absolute;
       bottom: 20px;
       left: 50%;
       transform: translateX(-50%);
-      padding: 10px 20px;
-      background-color: yellow;
-      color: black;
+      padding: 12px 32px;
+      background: #6e9c8f;
+      color: #fff;
       font-weight: bold;
       border: none;
-      border-radius: 5px;
+      border-radius: 8px;
       cursor: pointer;
+      font-size: 1.1rem;
+      box-shadow: 0 2px 8px rgba(23,70,66,0.10);
+      transition: background 0.2s, transform 0.2s;
+    }
+    .coin-button:hover {
+      background: #174642;
+      transform: scale(1.05);
     }
 
     .rectangle-blue-screen::before,
@@ -251,7 +273,15 @@
     .container {
       display: flex;
       flex-direction: column;
-      align-items: center; /* 추가: 도형을 가운데 정렬 */
+      align-items: center;
+      margin-left: 260px; /* 사이드바 공간 확보 */
+      background: #c8ded9;
+      border: 16px solid #174642;
+      border-radius: 0.5rem;
+      box-shadow: 0 8px 32px rgba(23,70,66,0.10);
+      padding: 24px 0 0 0;
+      min-width: 700px;
+      min-height: 700px;
     }
 
     /* 조이스틱 스타일 */
@@ -346,25 +376,29 @@
   .game-selection.disabled {
     pointer-events: none; /* 클릭 비활성화 */
     opacity: 0.5; /* 흐리게 표시 */
+    filter: grayscale(0.2);
   }
 
-  /* 스크린 중앙 텍스트 스타일 */
+  /* 스크린 중앙 텍스트 스타일 (common.css 색상 반영) */
   .screen-text {
     position: absolute;
-    color: white;
+    color: #174642;
     font-size: 24px;
     font-weight: bold;
     text-align: center;
+    left: 0; right: 0; top: 40%; /* 중앙 정렬 */
   }
 
   /* 게임오버 텍스트 스타일 */
   .game-over-text {
     position: absolute;
-    color: red;
+    color: #d32f2f;
     font-size: 32px;
     font-weight: bold;
     text-align: center;
-    display: none; /* 초기에는 숨김 */
+    left: 0; right: 0; top: 40%;
+    display: none;
+    text-shadow: 1px 2px 8px #fff, 0 0 8px #174642;
   }
 </style>
 </head>
@@ -413,8 +447,8 @@
   </div>
 
   <!-- 외부 Java스크립트 파일 참조 -->
-  <script src="game/snake.js"></script> <!-- Snake 게임 로직 -->
-  <script src="game/tetris.js"></script> <!-- Tetris 게임 로직 -->
+  <script src="game/snake.js"></script>
+  <script src="game/tetris.js"></script>
   <script>
     // 캔버스 및 버튼 요소 가져오기
     const snakeCanvas = document.getElementById('snakeCanvas');
@@ -425,33 +459,35 @@
     const screenText = document.getElementById('screenText');
     const gameOverText = document.getElementById('gameOverText');
 
-    let currentGame = 'snake'; // 현재 선택된 게임
+    let currentGame = 'snake';
+    let snakeSpeed = 120; // 기본 뱀 속도(ms)
+    let coinInserted = false;
+    let gameSelected = false;
+    let snakeStarted = false; // 중복 실행 방지
 
     // 초기 상태: 게임 목록 비활성화
     gameSelection.classList.add('disabled');
 
-    // 게임 시작 함수
-    function startGame() {
-      screenText.style.display = 'none'; // 게임 이름 숨김
-      gameOverText.style.display = 'none'; // 게임오버 숨김
-
-      if (currentGame === 'snake') {
-        startSnakeGame(); // Snake 게임 시작
-      } else if (currentGame === 'tetris') {
-        startTetrisGame(); // Tetris 게임 시작
-      }
-    }
-
-    // 게임오버 함수
-    function gameOver() {
-      screenText.style.display = 'none'; // 게임 이름 숨김
-      gameOverText.style.display = 'block'; // 게임오버 메시지 스크린에 표시
-    }
+    // 코인 버튼 클릭 이벤트
+    startButton.addEventListener('click', () => {
+      coinInserted = true;
+      gameSelection.classList.remove('disabled'); // 게임 목록 활성화
+      screenText.style.display = 'none';
+      gameOverText.style.display = 'none';
+      gameSelected = false;
+      snakeStarted = false;
+      snakeSpeed = 120; // 코인 넣을 때마다 속도 초기화
+      // 게임 목록 active 해제
+      gameItems.forEach(item => item.classList.remove('active'));
+    });
 
     // 게임 선택 함수
     function selectGame(game) {
+      if (!coinInserted) return; // 코인 안 넣으면 선택 불가
       currentGame = game;
-
+      gameSelected = true;
+      snakeStarted = false;
+      snakeSpeed = 120; // 게임 선택 시 속도 초기화
       // 선택된 게임 강조
       gameItems.forEach((item) => {
         if (item.textContent.includes(game.charAt(0).toUpperCase() + game.slice(1))) {
@@ -460,8 +496,7 @@
           item.classList.remove('active');
         }
       });
-
-      // 캔버스 전환
+      // 캔버스 전환 및 화면 표시
       if (game === 'snake') {
         snakeCanvas.style.display = 'block';
         tetrisCanvas.style.display = 'none';
@@ -469,26 +504,44 @@
         snakeCanvas.style.display = 'none';
         tetrisCanvas.style.display = 'block';
       }
-
       // 스크린 중앙에 게임 이름 표시
       screenText.textContent = game.charAt(0).toUpperCase() + game.slice(1) + " Game";
       screenText.style.display = 'block';
     }
 
-    // 코인 버튼 클릭 이벤트
-    startButton.addEventListener('click', () => {
-      gameSelection.classList.remove('disabled'); // 게임 목록 활성화
-      screenText.style.display = 'none'; // 게임 이름 숨기기
-      gameOverText.style.display = 'none'; // GAME OVER 숨기기
-    });
-
-    // 버튼 클릭 이벤트로 게임 시작
+    // 버튼 클릭 이벤트로 게임 시작 및 뱀 속도 증가
     document.querySelectorAll('.arcade-button').forEach((button) => {
-      button.addEventListener('click', startGame);
+      button.addEventListener('click', () => {
+        if (!coinInserted || !gameSelected) return;
+        if (currentGame === 'snake') {
+          if (!snakeStarted) {
+            snakeStarted = true;
+            startGame();
+          }
+          // 게임이 이미 시작된 경우에는 속도 증가 및 재시작 금지
+        } else {
+          startGame();
+        }
+      });
     });
 
-    // 예시: 게임오버 호출 (게임 로직에서 호출)
-    // gameOver();
+    function startGame() {
+      screenText.style.display = 'none';
+      gameOverText.style.display = 'none';
+      if (!coinInserted || !gameSelected) return;
+      if (currentGame === 'snake') {
+        if (typeof stopSnakeGame === 'function') stopSnakeGame();
+        if (typeof startSnakeGame === 'function') startSnakeGame(snakeSpeed);
+      } else if (currentGame === 'tetris') {
+        if (typeof startTetrisGame === 'function') startTetrisGame();
+      }
+    }
+
+    function gameOver() {
+      screenText.style.display = 'none';
+      gameOverText.style.display = 'block';
+    }
+    // ...existing code...
   </script>
 </body>
 </html>
