@@ -1,0 +1,91 @@
+[공통적으로 중복 사용된 주요 기능]
+- <!DOCTYPE html>, <html lang="ko">, <head>, <meta charset="UTF-8">, <title>
+- <link rel="stylesheet"> (CSS 연결)
+- <style> (내부 스타일)
+- <body>, <div>, <span>, <ul>, <li>, <a>
+- <button>, <form>, <input>, <textarea>
+- <script> (내부/외부 JS)
+- class, id, style, onclick, onsubmit 등 속성 사용
+
+-------------------------------
+[main.html]
+- 프로필 이미지: <img>
+- 할 일 목록: <ul>, <li>
+- 인사말, 날짜: <h2>, <p>
+- 감정 이모지: <span>
+- 최근 다이어리: <h3>, <ul>, <li>
+- 오디오 플레이어: <audio>, <source>
+- 게임 링크: <a>
+- 오른쪽 탭: <a>, <button>
+- 레이아웃: <div> (container, sidebar, content, side-area 등)
+- 총 기능 수: 13
+
+-------------------------------
+[music.html]
+- 네비게이션 메뉴: <nav>, <a>
+- 앨범 카드: <div>, <img>, <h3>, <p>
+- 플레이어: <button>, <input type="range">
+- section별 컨텐츠: <section>
+- JS로 동적 UI: <script>
+- select 박스: <select>, <option>
+- 총 기능 수: 13
+
+-------------------------------
+[diary.html]
+- 할 일/메모: <ul>, <li>, <input type="checkbox">, <textarea>
+- 캘린더: <table>, <thead>, <tbody>, <tr>, <th>, <td>
+- 월 이동: <button>
+- 다이어리 추가: <button onclick>
+- JS로 동적 캘린더: <script>
+- 총 기능 수: 13
+
+-------------------------------
+[diary_detail.html]
+- 일정 목록: <ul>, <li>, <input type="checkbox">
+- 다이어리 상세: <div>, <h3>
+- 목록으로 이동: <a>
+- 총 기능 수: 7
+
+-------------------------------
+[add_diary.html]
+- 일정 추가 폼: <form>, <input type="text/date">, <button>
+- 일정 목록: <ul>, <li>
+- 다이어리 작성 폼: <form>, <input>, <textarea>, <button>, <a>
+- 총 기능 수: 9
+
+-------------------------------
+[game.html]
+- 게임 선택 메뉴: <ul>, <li>
+- 아케이드 UI: <canvas>, <button>, <div>
+- JS로 게임 제어: <script src>, <script>
+- 총 기능 수: 8
+
+-------------------------------
+[message.html]
+- 친구 목록: <ul>, <li>, <div>
+- 메세지 UI: <form>, <input>, <button>
+- JS로 메세지 동작: <script>
+- 총 기능 수: 8
+
+-------------------------------
+[전체 중복/고유 기능 요약]
+- 중복: <div>, <ul>, <li>, <a>, <button>, <form>, <input>, <img>, <h2>/<h3>, <p>, <span>, <script>, <link>, <style>
+- 고유: <audio>, <canvas>, <table>, <select>, <textarea>, <section>, <source>, <thead>, <tbody>, <tr>, <th>, <td>
+
+-------------------------------
+[전체 기능 종류 수]
+- 총 21가지 주요 HTML 태그/기능 사용
+
+-------------------------------
+[이미지 사용 개수]
+- main.html: 1개 (<img src="https://i.pinimg.com/1200x/d6/4e/97/d64e9765deca662e8fa07d2cfdb67f7c.jpg">)
+- music.html: 12개 (앨범 카드 12개 <img>)
+- diary.html: 0개
+- diary_detail.html: 0개
+- add_diary.html: 0개
+- game.html: 0개
+- message.html: 0개
+
+-------------------------------
+[전체 이미지 태그(<img>) 사용 개수]
+- 총 13개
